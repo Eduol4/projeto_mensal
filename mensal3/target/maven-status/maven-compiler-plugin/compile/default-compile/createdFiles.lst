@@ -1,0 +1,4 @@
+com\mensal3\mensal3\Mensal3Application.class
+com\mensal3\mensal3\services\CarroService.class
+com\mensal3\mensal3\controllers\CarroController.class
+com\mensal3\mensal3\entities\CarroEntity.class
