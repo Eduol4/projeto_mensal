@@ -1,22 +1,41 @@
-// package com.mensal3.mensal3.entities;
+package com.mensal3.mensal3.entities;
 
-// public class TagEntity {
-//     private Long idTag;
-//     private String tituloTag;
+// @AllArgsConstructor
+// @Entity(name = "tag")
+public class TagEntity {
 
-//     public String getTituloTag() {
-// 		return tituloTag;
-// 	}
+    // @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idTag;
 
-// 	public void setTituloTag(String tituloTag) {
-// 		this.tituloTag = tituloTag;
-// 	}
+    // @Column(name = "tituloTag")
+	// @NotBlank
+    private String tituloTag;
+
+    // @ManyToMany(mappedBy = "tag")
+	// private List<TextoEntity> texto;
+
+    public String getTituloTag() {
+		return tituloTag;
+	}
+
+	public void setTituloTag(String tituloTag) {
+		this.tituloTag = tituloTag;
+	}
 	
-// 	public Long getIdTag() {
-// 		return idTag;
-// 	}
+	public Long getIdTag() {
+		return idTag;
+	}
 
-// 	public void setIdTag(Long idTag) {
-// 		this.idTag = idTag;
-// 	}
-// }
+	public void setIdTag(Long idTag) {
+		this.idTag = idTag;
+	}
+
+    // public List<TextoEntity> getTexto() {
+	// 	return texto;
+	// }
+
+	// public void setTexto(List<TextoEntity> texto) {
+	// 	this.texto = texto;
+	// }
+}

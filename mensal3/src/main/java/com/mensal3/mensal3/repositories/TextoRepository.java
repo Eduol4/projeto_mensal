@@ -5,6 +5,6 @@
 // import com.mensal3.mensal3.entities.TextoEntity;
 
 // public interface TextoRepository extends JPARepository<TextoEntityEntity, Long> {
-//     List<Object><TextoEntity> findByTags(String tagName);
+//  List<Object><TextoEntity> findByTags(String tagName);
 // 	List<TextoEntity> findByCategoria(String categoriaName);
 // }

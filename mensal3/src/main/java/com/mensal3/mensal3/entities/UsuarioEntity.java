@@ -1,50 +1,78 @@
-// package com.mensal3.mensal3.entities;
+package com.mensal3.mensal3.entities;
 
-// public class UsuarioEntity {
+// @NoArgsConstructor
+// @Entity(name = "usuario")
+public class UsuarioEntity {
 
-//     private Long idUsuario;
-//     private String nomeUsuario;
-//     private String email;
-//     private String senha;
-//     private int idade;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUsuario;
 
-//     public Long getIdUsuario() {
-// 		return idUsuario;
-// 	}
+    // @Column(name = "nomeUsuario")
+    // @NotBlank
+    private String nomeUsuario;
+    
+    // @Column(name = "email")
+    // @NotBlank
+    // @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
+    private String email;
+    
+    // @Column(name = "senha")
+    // @NotBlank
+    private String senha;
+    
+    // @Column(name = "idade", columnDefinition = "int default 16")
+    // @Min(16)
+    private int idade;
 
-// 	public void setIdUsuario(Long idUsuario) {
-// 		this.idUsuario = idUsuario;
-// 	}
+    // @OneToMany(mappedBy = "autor")
+    // private List<TextoEntity> texto;
 
-// 	public String getNomeUsuario() {
-// 		return nomeUsuario;
-// 	}
+    public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-// 	public void setNomeUsuario(String nomeUsuario) {
-// 		this.nomeUsuario = nomeUsuario;
-// 	}
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-// 	public String getEmail() {
-// 		return email;
-// 	}
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
 
-// 	public void setEmail(String email) {
-// 		this.email = email;
-// 	}
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
 
-// 	public String getSenha() {
-// 		return senha;
-// 	}
+	public String getEmail() {
+		return email;
+	}
 
-// 	public void setSenha(String senha) {
-// 		this.senha = senha;
-// 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-// 	public int getIdade() {
-// 		return idade;
-// 	}
+	public String getSenha() {
+		return senha;
+	}
 
-// 	public void setIdade(int idade) {
-// 		this.idade = idade;
-// 	}
-// }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+    // public List<TextoEntity> getTexto() {
+	// 	return texto;
+	// }
+
+	// public void setTexto(List<TextoEntity> texto) {
+	// 	this.texto = texto;
+	// }
+}
