@@ -1,14 +1,21 @@
 package com.mensal3.mensal3.entities;
 
-// @NoArgsConstructor
-// @Entity(name = "usuario")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Entity(name = "usuario")
 public class UsuarioEntity {
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    // @Column(name = "nomeUsuario")
+    @Column(name = "nomeUsuario")
     // @NotBlank
     private String nomeUsuario;
     
