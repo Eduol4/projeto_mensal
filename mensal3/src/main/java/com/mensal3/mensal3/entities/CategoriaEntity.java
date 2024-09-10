@@ -1,12 +1,22 @@
 package com.mensal3.mensal3.entities;
-// @AllArgsConstructor
 
-// @Table
-// @Entity(name = "categoria")
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Table
+@Entity(name = "categoria")
 public class CategoriaEntity {
 
-    // @Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
 
     // @Column(name = "tituloCategoria")

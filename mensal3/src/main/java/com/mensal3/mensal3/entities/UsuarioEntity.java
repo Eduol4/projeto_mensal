@@ -5,8 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "usuario")
 public class UsuarioEntity {
@@ -16,21 +20,21 @@ public class UsuarioEntity {
     private Long idUsuario;
 
     @Column(name = "nomeUsuario")
-    // @NotBlank
+    @NotBlank
     private String nomeUsuario;
     
-    // @Column(name = "email")
-    // @NotBlank
-    // @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
+    @Column(name = "email")
+    @NotBlank
+    @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
     private String email;
     
-    // @Column(name = "senha")
-    // @NotBlank
+    @Column(name = "senha")
+    @NotBlank
     private String senha;
     
     // @Column(name = "idade", columnDefinition = "int default 16")
     // @Min(16)
-    private int idade;
+    // private int idade;
 
     // @OneToMany(mappedBy = "autor")
     // private List<TextoEntity> texto;
@@ -67,13 +71,13 @@ public class UsuarioEntity {
 		this.senha = senha;
 	}
 
-	public int getIdade() {
-		return idade;
-	}
+	// public int getIdade() {
+	// 	return idade;
+	// }
 
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
+	// public void setIdade(int idade) {
+	// 	this.idade = idade;
+	// }
 
     // public List<TextoEntity> getTexto() {
 	// 	return texto;

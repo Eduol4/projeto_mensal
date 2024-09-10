@@ -1,12 +1,12 @@
-// package com.mensal3.mensal3.repositories;
+package com.mensal3.mensal3.repositories;
 
-// import java.util.List;
+import java.util.List;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// import com.mensal3.mensal3.entities.TextoEntity;
+import com.mensal3.mensal3.entities.TextoEntity;
 
-// public interface TextoRepository extends JpaRepository<TextoEntity, Long> {
-//     List<TextoEntity> findByTags(String tagName);
-// 	List<TextoEntity> findByCategoria(String categoriaName);
-// }
+public interface TextoRepository extends JpaRepository<TextoEntity, Long> {
+    // List<TextoEntity> findByTags(String tagName);
+	// List<TextoEntity> findByCategoria(String categoriaName);
+}

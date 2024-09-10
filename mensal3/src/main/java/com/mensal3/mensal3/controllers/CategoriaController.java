@@ -1,6 +1,7 @@
 package com.mensal3.mensal3.controllers;
 
-import org.hibernate.mapping.List;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,48 +15,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mensal3.mensal3.entities.CategoriaEntity;
+import com.mensal3.mensal3.services.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController {
 
-    // @Autowired
-	// private CategoriaService categoriaService;
+    @Autowired
+	private CategoriaService categoriaService;
 	
-	// @PostMapping("/registrarCategoria")
-	// public ResponseEntity<CategoriaEntity> registrarCategoria(@Validated @RequestBody CategoriaEntity categoriaEntity) {
-	// 	try {
-	// 		return ResponseEntity.ok(categoriaService.registrarCategoria(categoriaEntity));
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@PostMapping("/registrarCategoria")
+	public ResponseEntity<CategoriaEntity> registrarCategoria(@Validated @RequestBody CategoriaEntity categoriaEntity) {
+		try {
+			return ResponseEntity.ok(categoriaService.registrarCategoria(categoriaEntity));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// public ResponseEntity<List<CategoriaEntity>> listAllCategoria() {
-	// 	try {
-	// 		return ResponseEntity.ok(categoriaService.listAllCategoria());
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	public ResponseEntity<List<CategoriaEntity>> listAllCategoria() {
+		try {
+			return ResponseEntity.ok(categoriaService.listAllCategoria());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @DeleteMapping("/deletarCategoria/{idCategoria}")
-    // public ResponseEntity<Void> deleteCategoria(@PathVariable Long idCategoria) {
-	// 	try {
-	// 		categoriaService.deleteCategoria(idCategoria);
-	//         return ResponseEntity.noContent().build();
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@DeleteMapping("/deletarCategoria/{idCategoria}")
+    public ResponseEntity<Void> deleteCategoria(@PathVariable Long idCategoria) {
+		try {
+			categoriaService.deleteCategoria(idCategoria);
+	        return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @PutMapping("/alterarCategoria/{idCategoria}")
-	// public ResponseEntity<CategoriaEntity> alterarCategoria(@PathVariable Long idCategoria, @RequestBody CategoriaEntity novaCategoriaEntity) {
-	// 	try {
-	// 		CategoriaEntity categoriaAlterada = categoriaService.alterarCategoria(idCategoria, novaCategoriaEntity);
-	// 		return ResponseEntity.ok(categoriaAlterada);
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@PutMapping("/alterarCategoria/{idCategoria}")
+	public ResponseEntity<CategoriaEntity> alterarCategoria(@PathVariable Long idCategoria, @RequestBody CategoriaEntity novaCategoriaEntity) {
+		try {
+			CategoriaEntity categoriaAlterada = categoriaService.alterarCategoria(idCategoria, novaCategoriaEntity);
+			return ResponseEntity.ok(categoriaAlterada);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 }

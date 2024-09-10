@@ -1,11 +1,19 @@
 package com.mensal3.mensal3.entities;
 
-// @AllArgsConstructor
-// @Entity(name = "texto")
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "texto")
 public class TextoEntity {
 
-    // @Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTexto;
 
     // @Column(name = "tituloTexto")

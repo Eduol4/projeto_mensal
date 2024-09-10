@@ -1,6 +1,7 @@
 package com.mensal3.mensal3.controllers;
 
-import org.hibernate.mapping.List;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,31 +17,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mensal3.mensal3.entities.TextoEntity;
+import com.mensal3.mensal3.services.TextoService;
 
 @RestController
 @RequestMapping("/textos")
 public class TextoController {
 
-    // @Autowired
-	// private TextoService textoService;
+    @Autowired
+	private TextoService textoService;
 	
-	// @PostMapping("/registrarTexto")
-	// public ResponseEntity<TextoEntity> registrarTexto(@Validated @RequestBody TextoEntity textoEntity) {
-	// 	try {
-	// 		return ResponseEntity.ok(textoService.registrarTexto(textoEntity));
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@PostMapping("/registrarTexto")
+	public ResponseEntity<TextoEntity> registrarTexto(@Validated @RequestBody TextoEntity textoEntity) {
+		try {
+			return ResponseEntity.ok(textoService.registrarTexto(textoEntity));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @GetMapping("/listarTextos")
-	// public ResponseEntity<List<TextoEntity>> listAllTexto() {
-	// 	try {
-	// 		return ResponseEntity.ok(textoService.listAllTexto());
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@GetMapping("/listarTextos")
+	public ResponseEntity<List<TextoEntity>> listAllTexto() {
+		try {
+			return ResponseEntity.ok(textoService.listAllTexto());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
 	// @GetMapping("/buscarTag/{tagName}")
 	// public ResponseEntity<List<TextoEntity>> buscarTextoTag(@Validated @RequestParam(required = false) @PathVariable String tagName) {
@@ -60,33 +62,33 @@ public class TextoController {
 	// 	}
 	// }
 	
-	// @DeleteMapping("/deletarTexto/{idTexto}")
-    // public ResponseEntity<Void> deleteTexto(@PathVariable Long idTexto) {
-	// 	try {
-	//         textoService.deleteTexto(idTexto);
-	//         return ResponseEntity.noContent().build();
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@DeleteMapping("/deletarTexto/{idTexto}")
+    public ResponseEntity<Void> deleteTexto(@PathVariable Long idTexto) {
+		try {
+	        textoService.deleteTexto(idTexto);
+	        return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @PutMapping("/alterarTitulo/{idTexto}")
-	// public ResponseEntity<TextoEntity> alterarTitulo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
-	// 	try {
-	// 		TextoEntity textoAlterada = textoService.alterarTitulo(idTexto, novaTextoEntity);
-	// 		return ResponseEntity.ok(textoAlterada);
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@PutMapping("/alterarTitulo/{idTexto}")
+	public ResponseEntity<TextoEntity> alterarTitulo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+		try {
+			TextoEntity textoAlterada = textoService.alterarTitulo(idTexto, novaTextoEntity);
+			return ResponseEntity.ok(textoAlterada);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @PutMapping("/alterarConteudo/{idTexto}")
-	// public ResponseEntity<TextoEntity> alterarConteudo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
-	// 	try {
-	// 		TextoEntity textoAlterada = textoService.alterarConteudo(idTexto, novaTextoEntity);
-	// 		return ResponseEntity.ok(textoAlterada);
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@PutMapping("/alterarConteudo/{idTexto}")
+	public ResponseEntity<TextoEntity> alterarConteudo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+		try {
+			TextoEntity textoAlterada = textoService.alterarConteudo(idTexto, novaTextoEntity);
+			return ResponseEntity.ok(textoAlterada);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 }

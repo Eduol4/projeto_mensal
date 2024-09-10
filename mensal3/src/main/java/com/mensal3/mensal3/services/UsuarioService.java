@@ -26,9 +26,9 @@ public class UsuarioService {
 		return usuarioRepository.findById(idUsuario).get();
 	}
 	
-	// public UsuarioEntity findByEmail(String email) {
-	// 	return usuarioRepository.findByEmail(email);
-	// }
+	public UsuarioEntity findByEmail(String email) {
+		return usuarioRepository.findByEmail(email);
+	}
 	
 	public void deleteUsuario(Long idUsuario) {
 		usuarioRepository.deleteById(idUsuario);
