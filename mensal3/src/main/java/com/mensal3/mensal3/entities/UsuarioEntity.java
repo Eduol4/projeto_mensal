@@ -1,10 +1,13 @@
 package com.mensal3.mensal3.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -36,13 +39,12 @@ public class UsuarioEntity {
     // @Min(16)
     // private int idade;
 
-    // @OneToMany(mappedBy = "autor")
-    // private List<TextoEntity> texto;
+    @OneToMany(mappedBy = "autor")
+    private List<TextoEntity> texto;
 
     public Long getIdUsuario() {
 		return idUsuario;
 	}
-
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
@@ -50,7 +52,6 @@ public class UsuarioEntity {
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
-
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
@@ -58,7 +59,6 @@ public class UsuarioEntity {
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -66,7 +66,6 @@ public class UsuarioEntity {
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -79,11 +78,10 @@ public class UsuarioEntity {
 	// 	this.idade = idade;
 	// }
 
-    // public List<TextoEntity> getTexto() {
-	// 	return texto;
-	// }
-
-	// public void setTexto(List<TextoEntity> texto) {
-	// 	this.texto = texto;
-	// }
+    public List<TextoEntity> getTexto() {
+		return texto;
+	}
+	public void setTexto(List<TextoEntity> texto) {
+		this.texto = texto;
+	}
 }
