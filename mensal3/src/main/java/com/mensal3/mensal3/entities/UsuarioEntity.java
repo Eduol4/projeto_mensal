@@ -26,10 +26,10 @@ public class UsuarioEntity {
     @NotBlank
     private String nomeUsuario;
     
-    @Column(name = "email")
-    @NotBlank
-    @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
-    private String email;
+    // @Column(name = "email")
+    // @NotBlank
+    // @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
+    // private String email;
     
     @Column(name = "senha")
     @NotBlank
@@ -52,12 +52,12 @@ public class UsuarioEntity {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	// public String getEmail() {
+	// 	return email;
+	// }
+	// public void setEmail(String email) {
+	// 	this.email = email;
+	// }
 
 	public String getSenha() {
 		return senha;
