@@ -34,10 +34,6 @@ public class UsuarioEntity {
     @Column(name = "senha")
     @NotBlank
     private String senha;
-    
-    // @Column(name = "idade", columnDefinition = "int default 16")
-    // @Min(16)
-    // private int idade;
 
     @OneToMany(mappedBy = "autor")
     private List<TextoEntity> texto;
@@ -69,14 +65,6 @@ public class UsuarioEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	// public int getIdade() {
-	// 	return idade;
-	// }
-
-	// public void setIdade(int idade) {
-	// 	this.idade = idade;
-	// }
 
     public List<TextoEntity> getTexto() {
 		return texto;
