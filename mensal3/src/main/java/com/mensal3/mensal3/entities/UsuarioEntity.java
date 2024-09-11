@@ -32,7 +32,7 @@ public class UsuarioEntity {
     private String email;
     
     @Column(name = "senha")
-    //@NotBlank
+    @NotBlank
     private String senha;
 
     @OneToMany(mappedBy = "autor")

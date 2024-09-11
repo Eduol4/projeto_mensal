@@ -25,11 +25,11 @@ public class TextoEntity {
     private Long idTexto;
 
     @Column(name = "tituloTexto")
-	//@NotBlank
+	@NotBlank
     private String tituloTexto;
 
     @Column(name = "conteudoTexto")
-	//@NotBlank
+	@NotBlank
     private String conteudoTexto;
 
     @ManyToOne

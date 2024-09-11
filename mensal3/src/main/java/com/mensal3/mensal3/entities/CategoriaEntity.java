@@ -25,7 +25,7 @@ public class CategoriaEntity {
     private Long idCategoria;
 
     @Column(name = "tituloCategoria")
-	//@NotBlank
+	@NotBlank
     private String tituloCategoria;
 
 	// @OneToMany(mappedBy = "categoria")
