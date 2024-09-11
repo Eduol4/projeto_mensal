@@ -25,11 +25,11 @@ public class CategoriaEntity {
     private Long idCategoria;
 
     @Column(name = "tituloCategoria")
-	@NotBlank
+	//@NotBlank
     private String tituloCategoria;
 
-	@OneToMany(mappedBy = "categoria")
-	private List<TextoEntity> texto;
+	// @OneToMany(mappedBy = "categoria")
+	// private List<TextoEntity> texto;
 
     public String getTituloCategoria() {
 		return tituloCategoria;
@@ -45,10 +45,10 @@ public class CategoriaEntity {
 		this.idCategoria = idCategoria;
 	}
 
-    public List<TextoEntity> getTexto() {
-		return texto;
-	}
-	public void setTexto(List<TextoEntity> texto) {
-		this.texto = texto;
-	}
+    // public List<TextoEntity> getTexto() {
+	// 	return texto;
+	// }
+	// public void setTexto(List<TextoEntity> texto) {
+	// 	this.texto = texto;
+	// }
 }

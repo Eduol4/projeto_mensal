@@ -25,11 +25,11 @@ public class TextoEntity {
     private Long idTexto;
 
     @Column(name = "tituloTexto")
-	@NotBlank
+	//@NotBlank
     private String tituloTexto;
 
     @Column(name = "conteudoTexto")
-	@NotBlank
+	//@NotBlank
     private String conteudoTexto;
 
     @ManyToOne
@@ -44,9 +44,9 @@ public class TextoEntity {
 			)
 	private List<TagEntity> tag;
 
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private List<CategoriaEntity> categoria;
+	// @ManyToOne
+	// @JoinColumn(name = "categoria_id")
+	// private List<CategoriaEntity> categoria;
 
     public String getTituloTexto() {
 		return tituloTexto;
@@ -83,10 +83,10 @@ public class TextoEntity {
 		this.tag = tag;
 	}
 
-	public List<CategoriaEntity> getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(List<CategoriaEntity> categoria) {
-		this.categoria = categoria;
-	}
+	// public List<CategoriaEntity> getCategoria() {
+	// 	return categoria;
+	// }
+	// public void setCategoria(List<CategoriaEntity> categoria) {
+	// 	this.categoria = categoria;
+	// }
 }

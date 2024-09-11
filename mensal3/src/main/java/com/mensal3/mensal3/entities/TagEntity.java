@@ -22,7 +22,7 @@ public class TagEntity {
     private Long idTag;
 
     @Column(name = "tituloTag")
-	@NotBlank
+	//@NotBlank
     private String tituloTag;
 
     @ManyToMany(mappedBy = "tag")
