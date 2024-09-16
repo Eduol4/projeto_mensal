@@ -25,7 +25,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping("/registrarUsuario")
-	public ResponseEntity<UsuarioEntity> registrarUsuario(@Validated @RequestBody UsuarioEntity usuarioEntity) {
+	public ResponseEntity<UsuarioEntity> registrar(@Validated @RequestBody UsuarioEntity usuarioEntity) {
 		try {
 			return ResponseEntity.ok(usuarioService.registrarUsuario(usuarioEntity));
 		} catch (Exception e) {
@@ -34,7 +34,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/listarUsuarios")
-	public ResponseEntity<List<UsuarioEntity>> listAllUsuario() {
+	public ResponseEntity<List<UsuarioEntity>> listAll() {
 		try {
 			return ResponseEntity.ok(usuarioService.listAllUsuario());
 		} catch (Exception e) {
@@ -61,7 +61,7 @@ public class UsuarioController {
 	// }
 	
 	@DeleteMapping("/deletarUsuario/{idUsuario}")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable Long idUsuario) {
+    public ResponseEntity<Void> delete(@PathVariable Long idUsuario) {
 		try {
 	        usuarioService.deleteUsuario(idUsuario);
 	        return ResponseEntity.noContent().build();
