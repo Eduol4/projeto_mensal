@@ -5,8 +5,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
-import org.apache.el.stream.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.mensal3.mensal3.controllers.UsuarioController;
+import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.entities.UsuarioEntity;
 import com.mensal3.mensal3.repositories.UsuarioRepository;
 
@@ -33,13 +34,18 @@ public class UsuarioControllerTests {
     @BeforeEach
     void setUp() {
         List<UsuarioEntity> listaUser = new ArrayList<>();
-        listaUser.add(new UsuarioEntity(1, "Teste", "senhaTeste", "textoTeste"));
-        listaUser.add(new UsuarioEntity(2, "Testa", "senhoTesta", "textaTesta"));
-        listaUser.add(new UsuarioEntity(3, "Senhor Teste", "senha testosa", "texto testoso"));
+
+        List<TextoEntity> textoTeste =  new ArrayList<>();
+        List<TextoEntity> textoTeste2 =  new ArrayList<>();
+        List<TextoEntity> textoTeste3 =  new ArrayList<>();
+
+        listaUser.add(new UsuarioEntity(1L, "Teste", "senhaTeste", textoTeste));
+        listaUser.add(new UsuarioEntity(2L, "Testa", "senhoTesta", textoTeste2));
+        listaUser.add(new UsuarioEntity(3L, "Senhor Teste", "senha testosa", textoTeste3));
 
         when(usuarioRepository.findAll()).thenReturn(listaUser);
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity(1, "Brabo", "senhaBraba", "textoBrabo");
+        UsuarioEntity usuarioEntity = new UsuarioEntity(1L, "Brabo", "senhaBraba", null);
         when(usuarioRepository.findById(1L)).thenReturn(Optional.of(usuarioEntity));
     }
 
@@ -55,7 +61,7 @@ public class UsuarioControllerTests {
     void listarUsuariosByIdTest() {
         ResponseEntity<UsuarioEntity> UserById = this.usuarioController.findById(1L);
         assertEquals(HttpStatus.OK, UserById.getStatusCode());
-        assertEquals("Teste", UserById.getBody().getNomeUsuario());
+        assertEquals("Brabo", UserById.getBody().getNomeUsuario());
     }
 
     // @Test

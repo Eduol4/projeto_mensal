@@ -1,20 +1,17 @@
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\controllers\CarroController.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\controllers\CategoriaController.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\controllers\TagController.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\controllers\TextoController.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\controllers\UsuarioController.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\entities\CarroEntity.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\entities\CategoriaEntity.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\entities\TagEntity.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\entities\TextoEntity.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\entities\UsuarioEntity.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\Mensal3Application.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\repositories\CategoriaRepository.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\repositories\TagRepository.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\repositories\TextoRepository.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\repositories\UsuarioRepository.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\services\CarroService.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\services\CategoriaService.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\services\TagService.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\services\TextoService.java
-C:\Users\Eduardo\Documents\Projeto Spring\mensal3\src\main\java\com\mensal3\mensal3\services\UsuarioService.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\controllers\CategoriaController.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\controllers\TagController.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\controllers\TextoController.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\controllers\UsuarioController.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\entities\CategoriaEntity.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\entities\TagEntity.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\entities\TextoEntity.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\entities\UsuarioEntity.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\Mensal3Application.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\repositories\CategoriaRepository.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\repositories\TagRepository.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\repositories\TextoRepository.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\repositories\UsuarioRepository.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\services\CategoriaService.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\services\TagService.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\services\TextoService.java
+C:\Users\Eduardo\angular-estudos2\projeto_mensal\mensal3\src\main\java\com\mensal3\mensal3\services\UsuarioService.java

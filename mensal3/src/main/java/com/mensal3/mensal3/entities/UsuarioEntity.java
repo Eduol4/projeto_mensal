@@ -13,7 +13,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "usuario")
 public class UsuarioEntity {
@@ -26,17 +25,19 @@ public class UsuarioEntity {
     @NotBlank
     private String nomeUsuario;
     
-    // @Column(name = "email")
-    // @NotBlank
-    // @Pattern(regexp = "^[^@]+@[^@]+\\.[^@]+$")
-    // private String email;
-    
     @Column(name = "senha")
     @NotBlank
     private String senha;
 
     @OneToMany(mappedBy = "autor")
     private List<TextoEntity> texto;
+
+	public UsuarioEntity(Long idUsuario, String nomeUsuario, String senha, List<TextoEntity> texto) {
+        this.idUsuario = idUsuario;
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
+        this.texto = texto;
+    }
 
     public Long getIdUsuario() {
 		return idUsuario;
