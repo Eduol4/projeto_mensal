@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mensal3.mensal3.entities.TextoEntity;
@@ -44,23 +43,35 @@ public class TextoController {
 		}
 	}
 	
-	@GetMapping("/buscarTag/{tagName}")
-	public ResponseEntity<List<TextoEntity>> buscarTextoTag(@Validated @RequestParam(required = false) @PathVariable String tagName) {
-		try {
-			return ResponseEntity.ok(textoService.buscarTextoTag(tagName));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-	}
-	
-	@GetMapping("/buscarCategoria/{categoriaName}")
-	public ResponseEntity<List<TextoEntity>> buscarTextoCategoria(@Validated @RequestParam(required = false) @PathVariable String categoriaName) {
-		try {
-			return ResponseEntity.ok(textoService.buscarTextoCategoria(categoriaName));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-	}
+    @GetMapping("/buscarTag/{tagName}")
+    public ResponseEntity<List<TextoEntity>> buscarTextoTag(@PathVariable String tagName) {
+        try {
+            List<TextoEntity> textoEntity = textoService.buscarTextoTag(tagName);
+            
+            if (textoEntity.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            
+            return ResponseEntity.ok(textoEntity);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @GetMapping("/buscarCategoria/{categoriaName}")
+    public ResponseEntity<List<TextoEntity>> buscarTextoCategoria(@PathVariable String categoriaName) {
+        try {
+            List<TextoEntity> textoEntity = textoService.buscarTextoCategoria(categoriaName);
+            
+            if (textoEntity.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            
+            return ResponseEntity.ok(textoEntity);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 	
 	@DeleteMapping("/deletarTexto/{idTexto}")
     public ResponseEntity<Void> deleteTexto(@PathVariable Long idTexto) {

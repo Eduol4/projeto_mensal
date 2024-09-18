@@ -26,10 +26,6 @@ public class UsuarioService {
 		return usuarioRepository.findById(idUsuario).get();
 	}
 	
-	// public UsuarioEntity findByEmail(String email) {
-	// 	return usuarioRepository.findByEmail(email);
-	// }
-	
 	public void deleteUsuario(Long idUsuario) throws Exception {
 		UsuarioEntity usuario = usuarioRepository.findById(idUsuario)
 				.orElseThrow(() -> new Exception("Usuário não encontrado"));
