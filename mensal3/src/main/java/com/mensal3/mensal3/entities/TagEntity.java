@@ -9,11 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "tag")
 public class TagEntity {
 
@@ -27,6 +23,14 @@ public class TagEntity {
 
     @ManyToMany(mappedBy = "tag")
     private List<TextoEntity> texto;
+
+	public TagEntity() {}
+
+	public TagEntity(Long idTag, String tituloTag, List<TextoEntity> texto) {
+		this.idTag = idTag;
+		this.tituloTag = tituloTag;
+		this.texto = texto;
+	}
 
     public String getTituloTag() {
 		return tituloTag;
