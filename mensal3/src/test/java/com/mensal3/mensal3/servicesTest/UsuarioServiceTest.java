@@ -2,6 +2,9 @@ package com.mensal3.mensal3.servicesTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+// import static org.mockito.ArgumentMatchers.any;
+// import static org.mockito.Mockito.times;
+// import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -32,7 +35,6 @@ public class UsuarioServiceTest {
     @BeforeEach
     void setUp() {
         List<UsuarioEntity> listaUsuario = new ArrayList<>();
-
         List<TextoEntity> textoDoSenhorTeste =  new ArrayList<>();
         List<TextoEntity> textoDaSenhoraTesta =  new ArrayList<>();
 
@@ -45,6 +47,17 @@ public class UsuarioServiceTest {
         UsuarioEntity usuarioEntity2 = new UsuarioEntity(5L, "Testuda", "passworda", null);
         when(usuarioRepository.findById(4L)).thenReturn(Optional.of(usuarioEntity));
         when(usuarioRepository.findById(5L)).thenReturn(Optional.of(usuarioEntity2));
+    }
+
+    @Test
+    @DisplayName("Teste para registrar usuários")
+    void registrarUsuarioTest() {
+        List<TextoEntity> novoTexto =  new ArrayList<>();
+        UsuarioEntity novoUsuario = new UsuarioEntity(50L, "NovoUsuário", "senha do usuário", novoTexto);
+        when(usuarioRepository.save(novoUsuario)).thenReturn(novoUsuario);
+
+        UsuarioEntity usuarioRegistrado = this.usuarioService.registrarUsuario(novoUsuario);
+        assertEquals(novoUsuario, usuarioRegistrado);
     }
 
     @Test
@@ -71,10 +84,21 @@ public class UsuarioServiceTest {
     assertEquals("No value present", exception.getMessage());
     }
 
-    // @Test
-    // @DisplayName("Teste que deleta um usuário pelo Id")
-    // void deletarUsuarioByIdTest() {
-    //     void deletedUser = this.usuarioService.deleteUsuario(4L);
-    //     assert
-    // }
+    @Test
+    @DisplayName("Teste para deletar um usuário pelo Id")
+    void deleteUsuarioExistenteTest() throws Exception {
+        usuarioService.deleteUsuario(4L);
+        // verify(usuarioRepository, times(1)).delete(any(UsuarioEntity.class));
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar deletar um usuário pelo Id")
+    void deletarUsuarioInexistenteTest() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            usuarioService.deleteUsuario(69L);
+        });
+
+        assertEquals("Usuário não encontrado", exception.getMessage());
+        // verify(usuarioRepository, times(0)).delete(any(UsuarioEntity.class));
+    }
 }

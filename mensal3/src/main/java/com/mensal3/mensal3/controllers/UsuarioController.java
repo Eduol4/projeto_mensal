@@ -51,15 +51,6 @@ public class UsuarioController {
 		}
 	}
 	
-	// @GetMapping("/findByEmail/{email}")
-	// public ResponseEntity<UsuarioEntity> findByEmail(@Validated @PathVariable String email) {
-	// 	try {
-	// 		return ResponseEntity.ok(usuarioService.findByEmail(email));
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
-	
 	@DeleteMapping("/deletarUsuario/{idUsuario}")
     public ResponseEntity<Void> delete(@PathVariable Long idUsuario) {
 		try {

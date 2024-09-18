@@ -12,11 +12,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "texto")
 public class TextoEntity {
 
@@ -47,6 +43,15 @@ public class TextoEntity {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private CategoriaEntity categoria;
+
+	public TextoEntity() {}
+
+	public TextoEntity(Long idTexto, String tituloTexto, String conteudoTexto, UsuarioEntity autor) {
+        this.idTexto = idTexto;
+        this.tituloTexto = tituloTexto;
+        this.conteudoTexto = conteudoTexto;
+        this.autor = autor;
+    }
 
     public String getTituloTexto() {
 		return tituloTexto;
