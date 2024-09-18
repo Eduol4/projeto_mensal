@@ -32,25 +32,27 @@ public class TextoEntity {
 	@JoinColumn(name = "autor_id")
 	private UsuarioEntity autor;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "texto_tag",
-			joinColumns = @JoinColumn(name = "texto_id"),
-			inverseJoinColumns = @JoinColumn(name = "tag_id")
-			)
-	private List<TagEntity> tag;
+    @ManyToMany
+    @JoinTable(
+        name = "texto_tag",
+        joinColumns = @JoinColumn(name = "texto_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<TagEntity> tag;
 
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private CategoriaEntity categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaEntity categoria;
 
 	public TextoEntity() {}
 
-	public TextoEntity(Long idTexto, String tituloTexto, String conteudoTexto, UsuarioEntity autor) {
+	public TextoEntity(Long idTexto, String tituloTexto, String conteudoTexto, UsuarioEntity autor, List<TagEntity> tag, CategoriaEntity categoria) {
         this.idTexto = idTexto;
         this.tituloTexto = tituloTexto;
         this.conteudoTexto = conteudoTexto;
         this.autor = autor;
+		this.tag = tag;
+		this.categoria = categoria;
     }
 
     public String getTituloTexto() {

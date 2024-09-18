@@ -26,7 +26,7 @@ public class TagEntity {
     private String tituloTag;
 
     @ManyToMany(mappedBy = "tag")
-	private List<TextoEntity> texto;
+    private List<TextoEntity> texto;
 
     public String getTituloTag() {
 		return tituloTag;

@@ -23,13 +23,13 @@ public class TextoService {
 		return textoRepository.findAll();
 	}
 	
-	// public List<TextoEntity> buscarTextoTag(String tagName) {
-	// 	return textoRepository.findByTags(tagName);
-	// }
+	public List<TextoEntity> buscarTextoTag(String tagName) {
+		return textoRepository.findByTag_TituloTag(tagName);
+	}
 	
-	// public List<TextoEntity> buscarTextoCategoria(String categoriaName) {
-	// 	return textoRepository.findByCategoria(categoriaName);
-	// }
+	public List<TextoEntity> buscarTextoCategoria(String categoriaName) {
+		return textoRepository.findByCategoria_TituloCategoria(categoriaName);
+	}
 	
 	public void deleteTexto(Long idTexto) {
 		textoRepository.deleteById(idTexto);

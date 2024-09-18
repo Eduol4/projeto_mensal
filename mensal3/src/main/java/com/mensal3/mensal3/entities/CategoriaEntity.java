@@ -28,8 +28,8 @@ public class CategoriaEntity {
 	@NotBlank
     private String tituloCategoria;
 
-	@OneToMany(mappedBy = "categoria")
-	private List<TextoEntity> texto;
+    @OneToMany(mappedBy = "categoria")
+    private List<TextoEntity> texto;
 
     public String getTituloCategoria() {
 		return tituloCategoria;

@@ -44,23 +44,23 @@ public class TextoController {
 		}
 	}
 	
-	// @GetMapping("/buscarTag/{tagName}")
-	// public ResponseEntity<List<TextoEntity>> buscarTextoTag(@Validated @RequestParam(required = false) @PathVariable String tagName) {
-	// 	try {
-	// 		return ResponseEntity.ok(textoService.buscarTextoTag(tagName));
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@GetMapping("/buscarTag/{tagName}")
+	public ResponseEntity<List<TextoEntity>> buscarTextoTag(@Validated @RequestParam(required = false) @PathVariable String tagName) {
+		try {
+			return ResponseEntity.ok(textoService.buscarTextoTag(tagName));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
-	// @GetMapping("/buscarCategoria/{categoriaName}")
-	// public ResponseEntity<List<TextoEntity>> buscarTextoCategoria(@Validated @RequestParam(required = false) @PathVariable String categoriaName) {
-	// 	try {
-	// 		return ResponseEntity.ok(textoService.buscarTextoCategoria(categoriaName));
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	// 	}
-	// }
+	@GetMapping("/buscarCategoria/{categoriaName}")
+	public ResponseEntity<List<TextoEntity>> buscarTextoCategoria(@Validated @RequestParam(required = false) @PathVariable String categoriaName) {
+		try {
+			return ResponseEntity.ok(textoService.buscarTextoCategoria(categoriaName));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
 	@DeleteMapping("/deletarTexto/{idTexto}")
     public ResponseEntity<Void> deleteTexto(@PathVariable Long idTexto) {
