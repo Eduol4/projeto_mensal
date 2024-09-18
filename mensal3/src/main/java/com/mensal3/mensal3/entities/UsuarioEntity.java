@@ -9,11 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Entity(name = "usuario")
 public class UsuarioEntity {
 
@@ -31,6 +27,8 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "autor")
     private List<TextoEntity> texto;
+
+	public UsuarioEntity() {}
 
 	public UsuarioEntity(Long idUsuario, String nomeUsuario, String senha, List<TextoEntity> texto) {
         this.idUsuario = idUsuario;
@@ -52,14 +50,7 @@ public class UsuarioEntity {
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
-
-	// public String getEmail() {
-	// 	return email;
-	// }
-	// public void setEmail(String email) {
-	// 	this.email = email;
-	// }
-
+	
 	public String getSenha() {
 		return senha;
 	}

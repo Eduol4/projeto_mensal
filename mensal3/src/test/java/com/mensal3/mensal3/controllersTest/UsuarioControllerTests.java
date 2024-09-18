@@ -10,7 +10,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -46,27 +45,45 @@ public class UsuarioControllerTests {
         when(usuarioRepository.findAll()).thenReturn(listaUser);
 
         UsuarioEntity usuarioEntity = new UsuarioEntity(1L, "Brabo", "senhaBraba", null);
+        UsuarioEntity usuarioEntity2 = new UsuarioEntity(2L, "Braba", "senhoBrabo", null);
         when(usuarioRepository.findById(1L)).thenReturn(Optional.of(usuarioEntity));
+        when(usuarioRepository.findById(2L)).thenReturn(Optional.of(usuarioEntity2));
     }
 
     @Test
     @DisplayName("Teste que lista todos os usuários")
-    void listarUsuariosTest() {
+    void listarUsersTest() {
         ResponseEntity<List<UsuarioEntity>> lista = this.usuarioController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(3, lista.getBody().size());
     }
 
     @Test
-    void listarUsuariosByIdTest() {
+    @DisplayName("Teste que busca um usuário por Id")
+    void buscarUsersByIdTest() {
         ResponseEntity<UsuarioEntity> UserById = this.usuarioController.findById(1L);
         assertEquals(HttpStatus.OK, UserById.getStatusCode());
         assertEquals("Brabo", UserById.getBody().getNomeUsuario());
     }
 
-    // @Test
-    // void cenario02() {
-    //     ResponseEntity<List<UsuarioEntity>> lista = this.usuarioController.registrar();
-    //     assertEquals(HttpStatus.OK, lista.getStatusCode());
-    // }
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar um usuário por Id")
+    void buscarUsersByIdTestErro() {
+        ResponseEntity<UsuarioEntity> UserByIdErro = this.usuarioController.findById(9L);
+        assertEquals(HttpStatus.BAD_REQUEST, UserByIdErro.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Teste para deletar um usuário pelo Id")
+    void deletarUserByIdTest() {
+        ResponseEntity<Void> deletedUser = this.usuarioController.delete(2L);
+        assertEquals(HttpStatus.NO_CONTENT, deletedUser.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao deletar um usuário pelo Id")
+    void deletarUserByIdTestErro() {
+        ResponseEntity<Void> deletedUser = this.usuarioController.delete(69L);
+        assertEquals(HttpStatus.BAD_REQUEST, deletedUser.getStatusCode());
+    }
 }

@@ -30,7 +30,10 @@ public class UsuarioService {
 	// 	return usuarioRepository.findByEmail(email);
 	// }
 	
-	public void deleteUsuario(Long idUsuario) {
-		usuarioRepository.deleteById(idUsuario);
+	public void deleteUsuario(Long idUsuario) throws Exception {
+		UsuarioEntity usuario = usuarioRepository.findById(idUsuario)
+				.orElseThrow(() -> new Exception("Usuário não encontrado"));
+		
+		usuarioRepository.delete(usuario);
 	}
 }
