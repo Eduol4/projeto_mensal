@@ -53,7 +53,7 @@ public class UsuarioControllerTests {
 
     @Test
     @DisplayName("Teste que registra um usuário")
-    void registrarUsuarioControllerTest() {
+    void registrarUsuarioTest() {
         List<TextoEntity> novoTexto = new ArrayList<>();
         UsuarioEntity novoUsuario = new UsuarioEntity(6L, "Usuário Novo", "senha nova", novoTexto);
         when(usuarioService.registrarUsuario(novoUsuario)).thenReturn(novoUsuario);

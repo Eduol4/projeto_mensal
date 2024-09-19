@@ -26,7 +26,7 @@ public class TagController {
 	private TagService tagService;
 	
 	@PostMapping("/registrarTag")
-	public ResponseEntity<TagEntity> registrarTag(@Validated @RequestBody TagEntity tagEntity) {
+	public ResponseEntity<TagEntity> registrar(@Validated @RequestBody TagEntity tagEntity) {
 		try {
 			return ResponseEntity.ok(tagService.registrarTag(tagEntity));
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class TagController {
 	}
 	
 	@GetMapping("/listarTags")
-	public ResponseEntity<List<TagEntity>> listAllTag() {
+	public ResponseEntity<List<TagEntity>> listAll() {
 		try {
 			return ResponseEntity.ok(tagService.listAllTag());
 		} catch (Exception e) {
@@ -44,7 +44,7 @@ public class TagController {
 	}
 	
 	@DeleteMapping("/deletarTag/{idTag}")
-    public ResponseEntity<Void> deleteTag(@PathVariable Long idTag) {
+    public ResponseEntity<Void> delete(@PathVariable Long idTag) {
 		try {
 	        tagService.deleteTag(idTag);
 	        return ResponseEntity.noContent().build();
@@ -54,7 +54,7 @@ public class TagController {
 	}
 	
 	@PutMapping("/alterarTag/{idTag}")
-	public ResponseEntity<TagEntity> alterarTag(@PathVariable Long idTag, @RequestBody TagEntity novaTagEntity) {
+	public ResponseEntity<TagEntity> alterar(@PathVariable Long idTag, @RequestBody TagEntity novaTagEntity) {
 		try {
 			TagEntity tagAlterada = tagService.alterarTag(idTag, novaTagEntity);
 			return ResponseEntity.ok(tagAlterada);

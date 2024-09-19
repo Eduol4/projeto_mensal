@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mensal3.mensal3.entities.TagEntity;
+import com.mensal3.mensal3.entities.UsuarioEntity;
 import com.mensal3.mensal3.repositories.TagRepository;
 
 @Service
@@ -22,9 +23,16 @@ public class TagService {
 	public List<TagEntity> listAllTag() {
 		return tagRepository.findAll();	
 	}
+
+	// public TagEntity findById(Long idTag) {
+	// 	return tagRepository.findById(idTag).get();
+	// }
 	
-	public void deleteTag(Long idTag) {
-		tagRepository.deleteById(idTag);
+	public void deleteTag(Long idTag) throws Exception {
+		TagEntity tagEntity = tagRepository.findById(idTag)
+			.orElseThrow(() -> new Exception("Tag não encontrada"));
+		
+		tagRepository.delete(tagEntity);
 	}
 	
 	public TagEntity alterarTag(Long idTag, TagEntity novaTagEntity) throws Exception{
@@ -32,9 +40,7 @@ public class TagService {
 		
 		if (tagExistenteOpt.isPresent()) {
 			TagEntity tagExistente = tagExistenteOpt.get();
-			
 			tagExistente.setTituloTag(novaTagEntity.getTituloTag());
-			
 			return tagRepository.save(tagExistente);
 		}
 		else {

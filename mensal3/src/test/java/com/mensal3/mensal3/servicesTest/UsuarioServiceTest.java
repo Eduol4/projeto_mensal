@@ -25,7 +25,6 @@ import com.mensal3.mensal3.services.UsuarioService;
 
 @SpringBootTest
 public class UsuarioServiceTest {
-    
     @Autowired
     UsuarioService usuarioService;
 
@@ -86,14 +85,14 @@ public class UsuarioServiceTest {
 
     @Test
     @DisplayName("Teste para deletar um usuário pelo Id")
-    void deleteUsuarioExistenteTest() throws Exception {
+    void deleteUsuarioTest() throws Exception {
         usuarioService.deleteUsuario(4L);
         // verify(usuarioRepository, times(1)).delete(any(UsuarioEntity.class));
     }
 
     @Test
     @DisplayName("Testa um erro ao tentar deletar um usuário pelo Id")
-    void deletarUsuarioInexistenteTest() {
+    void deletarUsuarioTestErro() {
         Exception exception = assertThrows(Exception.class, () -> {
             usuarioService.deleteUsuario(69L);
         });
