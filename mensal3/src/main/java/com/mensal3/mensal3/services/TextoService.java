@@ -46,7 +46,7 @@ public class TextoService {
 			return textoRepository.save(textoExistente);
 		}
 		else {
-			throw new Exception("Texto " + idTexto + "não encontrada!");
+			throw new Exception("Texto não encontrado!");
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class TextoService {
 			return textoRepository.save(textoExistente);
 		}
 		else {
-			throw new Exception("Texto " + idTexto + "não encontrada!");
+			throw new Exception("Texto não encontrado!");
 		}
 	}
 }

@@ -10,11 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
-@AllArgsConstructor
 
 @Table
 @Entity(name = "categoria")
@@ -30,6 +25,14 @@ public class CategoriaEntity {
 
     @OneToMany(mappedBy = "categoria")
     private List<TextoEntity> texto;
+
+	public CategoriaEntity() {}
+
+	public CategoriaEntity(Long idCategoria, String tituloCategoria, List<TextoEntity> texto) {
+		this.idCategoria = idCategoria;
+		this.tituloCategoria = tituloCategoria;
+		this.texto = texto;
+	}
 
     public String getTituloCategoria() {
 		return tituloCategoria;

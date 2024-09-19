@@ -23,8 +23,11 @@ public class CategoriaService {
 		return categoriaRepository.findAll();
 	}
 	
-	public void deleteCategoria(Long idCategoria) {
-		categoriaRepository.deleteById(idCategoria);
+	public void deleteCategoria(Long idCategoria) throws Exception {
+		CategoriaEntity categoriaEntity = categoriaRepository.findById(idCategoria)
+			.orElseThrow(() -> new Exception("Categoria não encontrada"));
+		
+		categoriaRepository.delete(categoriaEntity);
 	}
 	
 	public CategoriaEntity alterarCategoria(Long idCategoria, CategoriaEntity novaCategoriaEntity) throws Exception{
@@ -38,7 +41,7 @@ public class CategoriaService {
 			return categoriaRepository.save(categoriaExistente);
 		}
 		else {
-			throw new Exception("Categoria " + idCategoria + "não encontrada!");
+			throw new Exception("Categoria não encontrada!");
 		}
 	}
 }

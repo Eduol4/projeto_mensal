@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -86,18 +87,18 @@ public class TagControllerTests {
         assertEquals(HttpStatus.BAD_REQUEST, tagByIdErro.getStatusCode());
     }
 
-    // @Test
-    // @DisplayName("Teste para alteração de tags pelo Id")
-    // void alterarTagById() {
-    // List<TextoEntity> textoAlteracao =  new ArrayList<>();
-    // TagEntity novaTag = new TagEntity(10L, "Tag Nova", textoAlteracao);
+    @Test
+    @DisplayName("Teste para alteração de tags pelo Id")
+    void alterarTagById() throws Exception {
+    List<TextoEntity> textoAlteracao =  new ArrayList<>();
+    TagEntity novaTag = new TagEntity(10L, "Tag Nova", textoAlteracao);
     
-    // when(tagService.alterarTag(10L)).thenReturn(novaTag);
+    when(tagService.alterarTag(10L, novaTag)).thenReturn(novaTag);
     
-    // ResponseEntity<TagEntity> resposta = tagController.alterar(1L, novaTag);
-    // assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    // assertEquals(novaTag, resposta.getBody());
+    ResponseEntity<TagEntity> resposta = tagController.alterar(10L, novaTag);
+    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    assertEquals(novaTag, resposta.getBody());
 
     // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
-    // }
+    }
 }

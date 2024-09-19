@@ -27,9 +27,9 @@ public class UsuarioService {
 	}
 	
 	public void deleteUsuario(Long idUsuario) throws Exception {
-		UsuarioEntity usuario = usuarioRepository.findById(idUsuario)
+		UsuarioEntity usuarioEntity = usuarioRepository.findById(idUsuario)
 				.orElseThrow(() -> new Exception("Usuário não encontrado"));
 		
-		usuarioRepository.delete(usuario);
+		usuarioRepository.delete(usuarioEntity);
 	}
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mensal3.mensal3.entities.TagEntity;
-import com.mensal3.mensal3.entities.UsuarioEntity;
 import com.mensal3.mensal3.repositories.TagRepository;
 
 @Service
@@ -44,7 +43,7 @@ public class TagService {
 			return tagRepository.save(tagExistente);
 		}
 		else {
-			throw new Exception("Tag " + idTag + "não encontrada!");
+			throw new Exception("Tag não encontrada!");
 		}
 	}
 }
