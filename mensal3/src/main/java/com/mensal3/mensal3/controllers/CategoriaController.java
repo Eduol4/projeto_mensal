@@ -25,7 +25,7 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 	
 	@PostMapping("/registrarCategoria")
-	public ResponseEntity<CategoriaEntity> registrarCategoria(@Validated @RequestBody CategoriaEntity categoriaEntity) {
+	public ResponseEntity<CategoriaEntity> registrar(@Validated @RequestBody CategoriaEntity categoriaEntity) {
 		try {
 			return ResponseEntity.ok(categoriaService.registrarCategoria(categoriaEntity));
 		} catch (Exception e) {
@@ -33,7 +33,7 @@ public class CategoriaController {
 		}
 	}
 	
-	public ResponseEntity<List<CategoriaEntity>> listAllCategoria() {
+	public ResponseEntity<List<CategoriaEntity>> listAll() {
 		try {
 			return ResponseEntity.ok(categoriaService.listAllCategoria());
 		} catch (Exception e) {
@@ -42,7 +42,7 @@ public class CategoriaController {
 	}
 	
 	@DeleteMapping("/deletarCategoria/{idCategoria}")
-    public ResponseEntity<Void> deleteCategoria(@PathVariable Long idCategoria) {
+    public ResponseEntity<Void> delete(@PathVariable Long idCategoria) {
 		try {
 			categoriaService.deleteCategoria(idCategoria);
 	        return ResponseEntity.noContent().build();
@@ -52,7 +52,7 @@ public class CategoriaController {
 	}
 	
 	@PutMapping("/alterarCategoria/{idCategoria}")
-	public ResponseEntity<CategoriaEntity> alterarCategoria(@PathVariable Long idCategoria, @RequestBody CategoriaEntity novaCategoriaEntity) {
+	public ResponseEntity<CategoriaEntity> alterar(@PathVariable Long idCategoria, @RequestBody CategoriaEntity novaCategoriaEntity) {
 		try {
 			CategoriaEntity categoriaAlterada = categoriaService.alterarCategoria(idCategoria, novaCategoriaEntity);
 			return ResponseEntity.ok(categoriaAlterada);

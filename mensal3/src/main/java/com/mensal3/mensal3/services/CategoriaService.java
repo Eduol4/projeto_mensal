@@ -35,7 +35,6 @@ public class CategoriaService {
 		
 		if (categoriaExistenteOpt.isPresent()) {
 			CategoriaEntity categoriaExistente = categoriaExistenteOpt.get();
-			
 			categoriaExistente.setTituloCategoria(novaCategoriaEntity.getTituloCategoria());
 			
 			return categoriaRepository.save(categoriaExistente);

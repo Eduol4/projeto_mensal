@@ -11,6 +11,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,16 @@ import org.springframework.http.ResponseEntity;
 
 import com.mensal3.mensal3.controllers.TextoController;
 import com.mensal3.mensal3.entities.CategoriaEntity;
+import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.entities.UsuarioEntity;
 import com.mensal3.mensal3.repositories.TextoRepository;
 import com.mensal3.mensal3.services.TextoService;
-import com.mensal3.mensal3.services.UsuarioService;
 
 @SpringBootTest
 public class TextoControllerTests {
     @MockBean
-    UsuarioService usuarioService;
+    TextoService textoService;
     
     @Autowired
     TextoController textoController;
@@ -38,37 +39,19 @@ public class TextoControllerTests {
     @MockBean
     TextoRepository textoRepository;
 
-    // @Test
-    // @DisplayName("Teste para buscar texto por tag via Controller")
-    //     void buscarTextoTagControllerTest() {
-    //     List<TextoEntity> textos = new ArrayList<>();
-    //     textos.add(new TextoEntity(1L, "Título 1", "Conteúdo 1", new UsuarioEntity(), new ArrayList<>(), new CategoriaEntity()));
+    @BeforeEach
+    void setUp() {
+        List<TextoEntity> listaTexto = new ArrayList<>();
+        UsuarioEntity autor1 = new UsuarioEntity();
+        List<TagEntity> tag1 = new ArrayList<>();
+        CategoriaEntity categoria1 = new CategoriaEntity();
 
-    //     when(TextoService.buscarTextoTag(any(String.class))).thenReturn(textos);
+        TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", autor1, tag1, categoria1);
+        // when(textoRepository.findByCategoria_TituloCategoria(categoria1)).thenReturn(Optional.of(textoEntity1));
+    }
 
-    //     ResponseEntity<List<TextoEntity>> resposta = textoController.buscarTextoTag("Tag de Teste");
+    @Test
+    void buscarPorCategoria() {
 
-    //     assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    //     assertNotNull(resposta.getBody());
-    //     assertEquals(1, resposta.getBody().size());
-
-    //     verify(TextoService, times(1)).buscarTextoTag(any(String.class));
-    // }
-
-    // @Test
-    // @DisplayName("Teste para buscar texto por categoria via Controller")
-    // void buscarTextoCategoriaControllerTest() {
-    //     List<TextoEntity> textos = new ArrayList<>();
-    //     textos.add(new TextoEntity(1L, "Título 1", "Conteúdo 1", new UsuarioEntity(), new ArrayList<>(), new CategoriaEntity()));
-
-    //     when(textoService.buscarTextoCategoria(any(String.class))).thenReturn(textos);
-
-    //     ResponseEntity<List<TextoEntity>> resposta = textoController.buscarTextoCategoria("Categoria de Teste");
-
-    //     assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    //     assertNotNull(resposta.getBody());
-    //     assertEquals(1, resposta.getBody().size());
-
-    //     verify(textoService, times(1)).buscarTextoCategoria(any(String.class));
-    // }
+    }
 }
