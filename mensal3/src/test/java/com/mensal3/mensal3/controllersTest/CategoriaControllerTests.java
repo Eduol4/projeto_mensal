@@ -72,10 +72,33 @@ public class CategoriaControllerTests {
         assertEquals(3, lista.getBody().size());
     }
 
+    //ERRO
     @Test
     @DisplayName("Teste para deletar categorias pelo Id")
     void deletarCategoriaById() {
         ResponseEntity<Void> categoriaByIdErro = this.categoriaController.delete(10L);
         assertEquals(HttpStatus.NO_CONTENT, categoriaByIdErro.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao deletar uma categoria pelo Id")
+    void deletarCategoriaByIdTestErro() {
+        ResponseEntity<Void> categoriaByIdErro = this.categoriaController.delete(69L);
+        assertEquals(HttpStatus.BAD_REQUEST, categoriaByIdErro.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Teste para alteração de categorias pelo Id")
+    void alterarCategoriaById() throws Exception {
+    List<TextoEntity> textoAlteracao =  new ArrayList<>();
+    CategoriaEntity novaCategoria = new CategoriaEntity(10L, "Categoria Nova", textoAlteracao);
+    
+    when(categoriaService.alterarCategoria(10L, novaCategoria)).thenReturn(novaCategoria);
+    
+    ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(10L, novaCategoria);
+    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    assertEquals(novaCategoria, resposta.getBody());
+
+    // verify(categoriaService, times(1)).alterarCategoria(eq(1L), any(CategoriaEntity.class));
     }
 }

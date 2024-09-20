@@ -26,7 +26,7 @@ public class TextoController {
 	private TextoService textoService;
 	
 	@PostMapping("/registrarTexto")
-	public ResponseEntity<TextoEntity> registrarTexto(@Validated @RequestBody TextoEntity textoEntity) {
+	public ResponseEntity<TextoEntity> registrar(@Validated @RequestBody TextoEntity textoEntity) {
 		try {
 			return ResponseEntity.ok(textoService.registrarTexto(textoEntity));
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class TextoController {
 	}
 	
 	@GetMapping("/listarTextos")
-	public ResponseEntity<List<TextoEntity>> listAllTexto() {
+	public ResponseEntity<List<TextoEntity>> listAll() {
 		try {
 			return ResponseEntity.ok(textoService.listAllTexto());
 		} catch (Exception e) {
@@ -44,7 +44,7 @@ public class TextoController {
 	}
 	
     @GetMapping("/buscarTag/{tagName}")
-    public ResponseEntity<List<TextoEntity>> buscarTextoTag(@PathVariable String tagName) {
+    public ResponseEntity<List<TextoEntity>> buscarTag(@PathVariable String tagName) {
         try {
             List<TextoEntity> textoEntity = textoService.buscarTextoTag(tagName);
             
@@ -59,7 +59,7 @@ public class TextoController {
     }
 
     @GetMapping("/buscarCategoria/{categoriaName}")
-    public ResponseEntity<List<TextoEntity>> buscarTextoCategoria(@PathVariable String categoriaName) {
+    public ResponseEntity<List<TextoEntity>> buscarCategoria(@PathVariable String categoriaName) {
         try {
             List<TextoEntity> textoEntity = textoService.buscarTextoCategoria(categoriaName);
             
@@ -74,7 +74,7 @@ public class TextoController {
     }
 	
 	@DeleteMapping("/deletarTexto/{idTexto}")
-    public ResponseEntity<Void> deleteTexto(@PathVariable Long idTexto) {
+    public ResponseEntity<Void> delete(@PathVariable Long idTexto) {
 		try {
 	        textoService.deleteTexto(idTexto);
 	        return ResponseEntity.noContent().build();

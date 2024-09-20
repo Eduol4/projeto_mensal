@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.repositories.TextoRepository;
 
@@ -31,8 +32,11 @@ public class TextoService {
 		return textoRepository.findByCategoria_TituloCategoria(categoriaName);
 	}
 	
-	public void deleteTexto(Long idTexto) {
-		textoRepository.deleteById(idTexto);
+	public void deleteTexto(Long idTexto) throws Exception{
+				TextoEntity textoEntity = textoRepository.findById(idTexto)
+			.orElseThrow(() -> new Exception("Texto não encontrado!"));
+		
+		textoRepository.delete(textoEntity);
 	}
 	
 	public TextoEntity alterarTitulo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{

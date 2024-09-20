@@ -1,11 +1,12 @@
-package com.mensal3.mensal3.controllersTest;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+package com.mensal3.mensal3.servicesTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,10 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.mensal3.mensal3.controllers.TextoController;
 import com.mensal3.mensal3.entities.CategoriaEntity;
 import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
@@ -25,12 +23,9 @@ import com.mensal3.mensal3.repositories.TextoRepository;
 import com.mensal3.mensal3.services.TextoService;
 
 @SpringBootTest
-public class TextoControllerTests {
-    @MockBean
-    TextoService textoService;
-    
+public class TextoServiceTest {
     @Autowired
-    TextoController textoController;
+    TextoService textoService;
 
     @MockBean
     TextoRepository textoRepository;
@@ -58,39 +53,40 @@ public class TextoControllerTests {
     }
 
     @Test
-    @DisplayName("Teste que registra um texto")
+    @DisplayName("Teste para registrar textos")
     void registrarTextoTest() {
         UsuarioEntity novoAutor = new UsuarioEntity();
-        CategoriaEntity novaCategoria = new CategoriaEntity();
         List<TagEntity> novaTag = new ArrayList<>();
-        TextoEntity novoTexto = new TextoEntity(5L, "Texto Novo", "conteudo novo", novoAutor, novaTag, novaCategoria);
-        when(textoService.registrarTexto(novoTexto)).thenReturn(novoTexto);
+        CategoriaEntity NovaCategoria = new CategoriaEntity();
+        TextoEntity novoTexto = new TextoEntity(5L, "Brabo", "brabinho", novoAutor, novaTag, NovaCategoria);
+        when(textoRepository.save(novoTexto)).thenReturn(novoTexto);
 
-        ResponseEntity<TextoEntity> textoRegistrado = textoController.registrar(novoTexto);
-        assertEquals(HttpStatus.OK, textoRegistrado.getStatusCode());
-        assertEquals(novoTexto, textoRegistrado.getBody());
+        TextoEntity textoRegistrado = this.textoService.registrarTexto(novoTexto);
+        assertEquals(novoTexto, textoRegistrado);
     }
 
     @Test
     @DisplayName("Teste que lista todos os textos")
-    void listarTextoTest() {
-        ResponseEntity<List<TextoEntity>> lista = this.textoController.listAll();
-        assertEquals(HttpStatus.OK, lista.getStatusCode());
-        assertEquals(3, lista.getBody().size());
+    void listarUsuariosTest() {
+        List<TextoEntity> lista = this.textoService.listAllTexto();
+        assertEquals(2, lista.size());
     }
 
     @Test
     @DisplayName("Teste para deletar um texto pelo Id")
-    void deletarTextoByIdTest() {
-        ResponseEntity<Void> deletedTexto = this.textoController.delete(4L);
-        assertEquals(HttpStatus.NO_CONTENT, deletedTexto.getStatusCode());
+    void deleteTextoTest() throws Exception {
+        textoService.deleteTexto(4L);
+        // verifytextoRepository, times(1)).delete(any(TextoEntity.class));
     }
 
     @Test
-    @DisplayName("Testa um erro ao deletar um texto pelo Id")
-    void deletarTextoByIdTestErro() {
-        ResponseEntity<Void> deletedTexto = this.textoController.delete(69L);
-        assertEquals(HttpStatus.BAD_REQUEST, deletedTexto.getStatusCode());
-    }
+    @DisplayName("Testa um erro ao tentar deletar um texto pelo Id")
+    void deletarTextoTestErro() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            textoService.deleteTexto(69L);
+        });
 
+        assertEquals("Texto não encontrado", exception.getMessage());
+        // verify(usuarioRepository, times(0)).delete(any(UsuarioEntity.class));
+    }
 }
