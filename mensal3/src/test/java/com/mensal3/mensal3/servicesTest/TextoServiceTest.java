@@ -46,6 +46,7 @@ public class TextoServiceTest {
         listaTexto.add(new TextoEntity(1L, "Teste", "Teste", autor1, tag1, categoria1));
         listaTexto.add(new TextoEntity(2L, "Texte", "Texte", autor2, tag2, categoria2));
         listaTexto.add(new TextoEntity(3L, "Texta", "Texta", autor3, tag3, categoria3));
+        when(textoRepository.findAll()).thenReturn(listaTexto);
 
         TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", null, null, null);
         // when(textoRepository.findByCategoria_TituloCategoria(categoria1)).thenReturn(Optional.of(textoEntity1));
@@ -69,7 +70,24 @@ public class TextoServiceTest {
     @DisplayName("Teste que lista todos os textos")
     void listarUsuariosTest() {
         List<TextoEntity> lista = this.textoService.listAllTexto();
-        assertEquals(2, lista.size());
+        assertEquals(3, lista.size());
+    }
+
+    @Test
+    @DisplayName("Teste que busca um texto pelo Id")
+    void buscarTextoByIdTest() {
+        TextoEntity TextoById = this.textoService.findById(4L);
+        assertEquals("TituloTeste", TextoById.getTituloTexto());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar um texto pelo Id")
+    void buscarTextoByIdTestErro() {
+        Exception exception = assertThrows(Exception.class, () -> {
+        textoService.findById(22L);
+    });
+
+    assertEquals("No value present", exception.getMessage());
     }
 
     @Test
@@ -86,7 +104,7 @@ public class TextoServiceTest {
             textoService.deleteTexto(69L);
         });
 
-        assertEquals("Texto não encontrado", exception.getMessage());
+        assertEquals("Texto não encontrado!", exception.getMessage());
         // verify(usuarioRepository, times(0)).delete(any(UsuarioEntity.class));
     }
 }

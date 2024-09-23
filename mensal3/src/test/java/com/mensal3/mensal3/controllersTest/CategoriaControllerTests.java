@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,23 +35,23 @@ public class CategoriaControllerTests {
     @MockBean
     CategoriaRepository categoriaRepository;
 
-    @BeforeEach
-    void setUp() {
-        List<CategoriaEntity> listaCategorias = new ArrayList<>();
-        List<TextoEntity> textoTeste1 = new ArrayList<>();
-        List<TextoEntity> textoTeste2 = new ArrayList<>();
-        List<TextoEntity> textoTeste3 = new ArrayList<>();
+    // @BeforeEach
+    // void setUp() {
+        // List<CategoriaEntity> listaCategorias = new ArrayList<>();
+        // List<TextoEntity> textoTeste1 = new ArrayList<>();
+        // List<TextoEntity> textoTeste2 = new ArrayList<>();
+        // List<TextoEntity> textoTeste3 = new ArrayList<>();
 
-        listaCategorias.add(new CategoriaEntity(1L, "CategoriaTeste", textoTeste1));
-        listaCategorias.add(new CategoriaEntity(2L, "TesteCategoria", textoTeste2));
-        listaCategorias.add(new CategoriaEntity(3L, "TeTeste", textoTeste3));
-        when(categoriaRepository.findAll()).thenReturn(listaCategorias);
+        // listaCategorias.add(new CategoriaEntity(1L, "CategoriaTeste", textoTeste1));
+        // listaCategorias.add(new CategoriaEntity(2L, "TesteCategoria", textoTeste2));
+        // listaCategorias.add(new CategoriaEntity(3L, "TeTeste", textoTeste3));
+        // when(categoriaRepository.findAll()).thenReturn(listaCategorias);
 
-        CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
-        CategoriaEntity categoriaEntity2 = new CategoriaEntity(5L, "Testinha", null);
-        when(categoriaRepository.findById(4L)).thenReturn(Optional.of(categoriaEntity1));
-        when(categoriaRepository.findById(5L)).thenReturn(Optional.of(categoriaEntity2));
-    }
+        // CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
+        // CategoriaEntity categoriaEntity2 = new CategoriaEntity(5L, "Testinha", null);
+        // when(categoriaRepository.findById(4L)).thenReturn(Optional.of(categoriaEntity1));
+        // when(categoriaRepository.findById(5L)).thenReturn(Optional.of(categoriaEntity2));
+    // }
 
     @Test
     @DisplayName("Teste que registra uma categoria")
@@ -67,12 +68,42 @@ public class CategoriaControllerTests {
     @Test
     @DisplayName("Teste que lista todas as categorias")
     void listarCategoriasTest() {
+        List<CategoriaEntity> listaCategorias = new ArrayList<>();
+        List<TextoEntity> textoTeste1 = new ArrayList<>();
+        List<TextoEntity> textoTeste2 = new ArrayList<>();
+        List<TextoEntity> textoTeste3 = new ArrayList<>();
+
+        listaCategorias.add(new CategoriaEntity(1L, "CategoriaTeste", textoTeste1));
+        listaCategorias.add(new CategoriaEntity(2L, "TesteCategoria", textoTeste2));
+        listaCategorias.add(new CategoriaEntity(3L, "TeTeste", textoTeste3));
+        when(categoriaService.listAllCategoria()).thenReturn(listaCategorias);
+
         ResponseEntity<List<CategoriaEntity>> lista = this.categoriaController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(3, lista.getBody().size());
     }
 
-    //ERRO
+    @Test
+    @DisplayName("Teste que busca uma categoria por Id")
+    void buscarCategoriasByIdTest() {
+        CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
+        when(categoriaRepository.findById(4L)).thenReturn(Optional.of(categoriaEntity1));
+        
+        ResponseEntity<CategoriaEntity> CategoriaById = this.categoriaController.findById(4L);
+        assertEquals(HttpStatus.OK, CategoriaById.getStatusCode());
+        assertEquals("Testão", CategoriaById.getBody().getTituloCategoria());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar uma categoria por Id")
+    void buscarCategoriasByIdTestErro() {
+        when(categoriaService.findById(10L)).thenThrow(new NoSuchElementException("Categoria não encontrada"));
+
+        ResponseEntity<CategoriaEntity> CategoriaByIdErro = this.categoriaController.findById(10L);
+        assertEquals(HttpStatus.BAD_REQUEST, CategoriaByIdErro.getStatusCode());
+    }
+
+    //COM ERRO
     @Test
     @DisplayName("Teste para deletar categorias pelo Id")
     void deletarCategoriaById() {
@@ -80,6 +111,7 @@ public class CategoriaControllerTests {
         assertEquals(HttpStatus.NO_CONTENT, categoriaByIdErro.getStatusCode());
     }
 
+    //COM ERRO
     @Test
     @DisplayName("Testa um erro ao deletar uma categoria pelo Id")
     void deletarCategoriaByIdTestErro() {

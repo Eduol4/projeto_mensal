@@ -63,6 +63,23 @@ public class TagServiceTest {
     }
 
     @Test
+    @DisplayName("Teste que busca uma tag pelo Id")
+    void buscarTagByIdTest() {
+        TagEntity TagById = this.tagService.findById(12L);
+        assertEquals("Toma", TagById.getTituloTag());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar uma tag pelo Id")
+    void buscarTagByIdTestErro() {
+        Exception exception = assertThrows(Exception.class, () -> {
+        tagService.findById(22L);
+    });
+
+    assertEquals("No value present", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("Teste para deletar uma tag pelo Id")
     void deletarTagTest() throws Exception {
         tagService.deleteTag(12L);

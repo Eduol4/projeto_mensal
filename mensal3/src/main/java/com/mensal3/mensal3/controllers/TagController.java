@@ -42,7 +42,16 @@ public class TagController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
-	
+
+	@GetMapping("/buscarTag/{idTag}")
+	public ResponseEntity<TagEntity> findById(@PathVariable Long idTag) {
+		try {
+			return ResponseEntity.ok(tagService.findById(idTag));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
+
 	@DeleteMapping("/deletarTag/{idTag}")
     public ResponseEntity<Void> delete(@PathVariable Long idTag) {
 		try {

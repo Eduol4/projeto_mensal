@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.mensal3.mensal3.entities.CategoriaEntity;
-import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.repositories.CategoriaRepository;
 import com.mensal3.mensal3.services.CategoriaService;
@@ -61,6 +60,23 @@ public class CategoriaServiceTest {
     void listarCategoriasTest() {
         List<CategoriaEntity> lista = this.categoriaService.listAllCategoria();
         assertEquals(2, lista.size());
+    }
+
+    @Test
+    @DisplayName("Teste que busca uma categoria pelo Id")
+    void buscarCategoriaByIdTest() {
+        CategoriaEntity CategoriaById = this.categoriaService.findById(12L);
+        assertEquals("Toma", CategoriaById.getTituloCategoria());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar uma categoria pelo Id")
+    void buscarCategoriaByIdTestErro() {
+        Exception exception = assertThrows(Exception.class, () -> {
+        categoriaService.findById(22L);
+    });
+
+    assertEquals("No value present", exception.getMessage());
     }
 
     @Test

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping("/registrarUsuario")
-	public ResponseEntity<UsuarioEntity> registrar(@Validated @RequestBody UsuarioEntity usuarioEntity) {
+	public ResponseEntity<UsuarioEntity> registrar(@RequestBody UsuarioEntity usuarioEntity) {
 		try {
 			return ResponseEntity.ok(usuarioService.registrarUsuario(usuarioEntity));
 		} catch (Exception e) {
@@ -43,7 +42,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/findById/{idUsuario}")
-	public ResponseEntity<UsuarioEntity> findById(@Validated @PathVariable Long idUsuario) {
+	public ResponseEntity<UsuarioEntity> findById(@PathVariable Long idUsuario) {
 		try {
 			return ResponseEntity.ok(usuarioService.findById(idUsuario));
 		} catch (Exception e) {

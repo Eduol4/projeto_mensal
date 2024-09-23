@@ -58,6 +58,15 @@ public class TextoController {
         }
     }
 
+	@GetMapping("/buscarTexto/{idTexto}")
+	public ResponseEntity<TextoEntity> findById(@PathVariable Long idTexto) {
+		try {
+			return ResponseEntity.ok(textoService.findById(idTexto));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
+
     @GetMapping("/buscarCategoria/{categoriaName}")
     public ResponseEntity<List<TextoEntity>> buscarCategoria(@PathVariable String categoriaName) {
         try {

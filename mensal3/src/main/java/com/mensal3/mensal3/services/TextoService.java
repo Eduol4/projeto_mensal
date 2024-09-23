@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.repositories.TextoRepository;
 
@@ -30,6 +29,10 @@ public class TextoService {
 	
 	public List<TextoEntity> buscarTextoCategoria(String categoriaName) {
 		return textoRepository.findByCategoria_TituloCategoria(categoriaName);
+	}
+
+	public TextoEntity findById(Long idTexto) {
+		return textoRepository.findById(idTexto).get();
 	}
 	
 	public void deleteTexto(Long idTexto) throws Exception{

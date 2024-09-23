@@ -22,6 +22,10 @@ public class CategoriaService {
 	public List<CategoriaEntity> listAllCategoria() {
 		return categoriaRepository.findAll();
 	}
+
+	public CategoriaEntity findById(Long idCategoria) {
+		return categoriaRepository.findById(idCategoria).get();
+	}
 	
 	public void deleteCategoria(Long idCategoria) throws Exception {
 		CategoriaEntity categoriaEntity = categoriaRepository.findById(idCategoria)

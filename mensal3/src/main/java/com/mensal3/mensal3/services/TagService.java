@@ -23,9 +23,9 @@ public class TagService {
 		return tagRepository.findAll();	
 	}
 
-	// public TagEntity findById(Long idTag) {
-	// 	return tagRepository.findById(idTag).get();
-	// }
+	public TagEntity findById(Long idTag) {
+		return tagRepository.findById(idTag).get();
+	}
 	
 	public void deleteTag(Long idTag) throws Exception {
 		TagEntity tagEntity = tagRepository.findById(idTag)

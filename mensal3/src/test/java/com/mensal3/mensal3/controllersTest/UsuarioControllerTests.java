@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -33,23 +34,23 @@ public class UsuarioControllerTests {
     @MockBean
     UsuarioRepository usuarioRepository;
 
-    @BeforeEach
-    void setUp() {
-        List<UsuarioEntity> listaUser = new ArrayList<>();
-        List<TextoEntity> textoTeste =  new ArrayList<>();
-        List<TextoEntity> textoTeste2 =  new ArrayList<>();
-        List<TextoEntity> textoTeste3 =  new ArrayList<>();
+    // @BeforeEach
+    // void setUp() {
+        // List<UsuarioEntity> listaUser = new ArrayList<>();
+        // List<TextoEntity> textoTeste =  new ArrayList<>();
+        // List<TextoEntity> textoTeste2 =  new ArrayList<>();
+        // List<TextoEntity> textoTeste3 =  new ArrayList<>();
 
-        listaUser.add(new UsuarioEntity(1L, "Teste", "senhaTeste", textoTeste));
-        listaUser.add(new UsuarioEntity(2L, "Testa", "senhoTesta", textoTeste2));
-        listaUser.add(new UsuarioEntity(3L, "Senhor Teste", "senha testosa", textoTeste3));
-        when(usuarioRepository.findAll()).thenReturn(listaUser);
+        // listaUser.add(new UsuarioEntity(1L, "Teste", "senhaTeste", textoTeste));
+        // listaUser.add(new UsuarioEntity(2L, "Testa", "senhoTesta", textoTeste2));
+        // listaUser.add(new UsuarioEntity(3L, "Senhor Teste", "senha testosa", textoTeste3));
+        // when(usuarioRepository.findAll()).thenReturn(listaUser);
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
-        UsuarioEntity usuarioEntity2 = new UsuarioEntity(5L, "Braba", "senhoBrabo", null);
-        when(usuarioRepository.findById(4L)).thenReturn(Optional.of(usuarioEntity));
-        when(usuarioRepository.findById(5L)).thenReturn(Optional.of(usuarioEntity2));
-    }
+        // UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
+        // UsuarioEntity usuarioEntity2 = new UsuarioEntity(5L, "Braba", "senhoBrabo", null);
+        // when(usuarioRepository.findById(4L)).thenReturn(Optional.of(usuarioEntity));
+        // when(usuarioRepository.findById(5L)).thenReturn(Optional.of(usuarioEntity2));
+    // }
 
     @Test
     @DisplayName("Teste que registra um usuário")
@@ -63,21 +64,19 @@ public class UsuarioControllerTests {
         assertEquals(novoUsuario, userRegistrado.getBody());
     }
 
-    // @Test
-    // @DisplayName("Testa um erro ao registrar um usuário")
-    // void registrarUsuarioControllerErroTest() {
-    //     List<TextoEntity> TextoRuim = new ArrayList<>();
-    //     UsuarioEntity usuarioInvalido = new UsuarioEntity(6L, null, "senha ruim", TextoRuim);
-    //     when(usuarioService.registrarUsuario(usuarioInvalido)).thenReturn(usuarioInvalido);
-
-    //     ResponseEntity<UsuarioEntity> userRegistrado = usuarioController.registrar(usuarioInvalido);
-    //     assertEquals(HttpStatus.BAD_REQUEST, userRegistrado.getStatusCode());
-    //     assertEquals(usuarioInvalido, userRegistrado.getBody());
-    // }
-
     @Test
     @DisplayName("Teste que lista todos os usuários")
     void listarUsersTest() {
+        List<UsuarioEntity> listaUser = new ArrayList<>();
+        List<TextoEntity> textoTeste = new ArrayList<>();
+        List<TextoEntity> textoTeste2 = new ArrayList<>();
+        List<TextoEntity> textoTeste3 = new ArrayList<>();
+    
+        listaUser.add(new UsuarioEntity(1L, "Teste", "senhaTeste", textoTeste));
+        listaUser.add(new UsuarioEntity(2L, "Testa", "senhoTesta", textoTeste2));
+        listaUser.add(new UsuarioEntity(3L, "Senhor Teste", "senha testosa", textoTeste3));
+        when(usuarioService.listAllUsuario()).thenReturn(listaUser);
+    
         ResponseEntity<List<UsuarioEntity>> lista = this.usuarioController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(3, lista.getBody().size());
@@ -86,6 +85,9 @@ public class UsuarioControllerTests {
     @Test
     @DisplayName("Teste que busca um usuário por Id")
     void buscarUsersByIdTest() {
+        UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
+        when(usuarioService.findById(4L)).thenReturn(usuarioEntity);
+        
         ResponseEntity<UsuarioEntity> UserById = this.usuarioController.findById(4L);
         assertEquals(HttpStatus.OK, UserById.getStatusCode());
         assertEquals("Brabo", UserById.getBody().getNomeUsuario());
@@ -94,17 +96,24 @@ public class UsuarioControllerTests {
     @Test
     @DisplayName("Testa um erro ao tentar buscar um usuário por Id")
     void buscarUsersByIdTestErro() {
-        ResponseEntity<UsuarioEntity> UserByIdErro = this.usuarioController.findById(9L);
+        when(usuarioService.findById(10L)).thenThrow(new NoSuchElementException("Usuário não encontrado"));
+
+        ResponseEntity<UsuarioEntity> UserByIdErro = this.usuarioController.findById(10L);
         assertEquals(HttpStatus.BAD_REQUEST, UserByIdErro.getStatusCode());
     }
 
+    // COM ERRO
     @Test
     @DisplayName("Teste para deletar um usuário pelo Id")
     void deletarUserByIdTest() {
-        ResponseEntity<Void> deletedUser = this.usuarioController.delete(2L);
+        UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
+        when(usuarioService.findById(4L)).thenReturn(usuarioEntity);
+
+        ResponseEntity<Void> deletedUser = this.usuarioController.delete(4L);
         assertEquals(HttpStatus.NO_CONTENT, deletedUser.getStatusCode());
     }
 
+    // COM ERRO
     @Test
     @DisplayName("Testa um erro ao deletar um usuário pelo Id")
     void deletarUserByIdTestErro() {
