@@ -135,4 +135,49 @@ public class TextoServiceTest {
         // verify(textoRepository, times(1)).findById(1L);
         // verify(textoRepository, never()).save(any());
     }
+
+    @Test
+    @DisplayName("Teste que busca textos por tag")
+    void buscarTextoPorTagTest() {
+        List<TextoEntity> textoByTag = new ArrayList<>();
+        List<TagEntity> tags = new ArrayList<>();
+
+        TagEntity tag = new TagEntity(1L, "Tag de Teste", new ArrayList<>());
+        tags.add(tag);
+
+        textoByTag.add(new TextoEntity(1L, "TítuloByTag1", "ConteúdoByTag1", null, tags, null));
+        textoByTag.add(new TextoEntity(2L, "TítuloByTag2", "ConteúdoByTag2", null, tags, null));
+        when(textoRepository.findByTag_TituloTag("Tag de Teste")).thenReturn(textoByTag);
+
+        List<TextoEntity> textosResultado = textoService.buscarTextoTag("Tag de Teste");
+
+        assertEquals(2, textosResultado.size());
+        assertEquals("TítuloByTag1", textosResultado.get(0).getTituloTexto());
+        assertEquals("TítuloByTag2", textosResultado.get(1).getTituloTexto());
+
+        // verify(textoRepository, times(1)).findByTag_TituloTag("Tag de Teste");
+    }
+
+    // @Test
+    // @DisplayName("Teste que busca textos por categoria")
+    // void buscarTextoPorCategoriaTest() {
+    //     List<TextoEntity> textoByTag = new ArrayList<>();
+    //     CategoriaEntity categorias = new CategoriaEntity();
+
+    //     CategoriaEntity categoria = new CategoriaEntity(1L, "Categoria de Teste", new ArrayList<>());
+    //     categorias.add(categoria);
+
+    //     textoByCategoria.add(new TextoEntity(1L, "TítuloByCategoria1", "ConteúdoByCategoria1", null, null, categorias));
+    //     textoByCategoria.add(new TextoEntity(2L, "TítuloByCategoria2", "ConteúdoByCategoria2", null, null, categorias));
+    //     when(textoRepository.findByCategoria_TituloCategoria("Categoria de Teste")).thenReturn(textoByCategoria);
+
+    //     List<TextoEntity> textosResultado = textoService.buscarTextoCategoria("Categoria de Teste");
+
+    //     assertEquals(2, textosResultado.size());
+    //     assertEquals("TítuloByCategoria1", textosResultado.get(0).getTituloTexto());
+    //     assertEquals("TítuloByCategoria2", textosResultado.get(1).getTituloTexto());
+
+        // verify(textoRepository, times(1)).findByCategoria_TituloCategoria("Categoria de Teste");
+    // }
 }
+
