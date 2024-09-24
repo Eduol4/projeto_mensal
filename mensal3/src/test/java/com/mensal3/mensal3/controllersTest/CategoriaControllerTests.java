@@ -1,14 +1,14 @@
 package com.mensal3.mensal3.controllersTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.mensal3.mensal3.controllers.CategoriaController;
 import com.mensal3.mensal3.entities.CategoriaEntity;
-import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.repositories.CategoriaRepository;
 import com.mensal3.mensal3.services.CategoriaService;
@@ -66,6 +65,19 @@ public class CategoriaControllerTests {
     }
 
     @Test
+    @DisplayName("Testa um erro ao registrar uma categoria")
+    void registrarCategoriaTestErro() {
+        List<TextoEntity> novoTexto = new ArrayList<>();
+        CategoriaEntity novaCategoria = new CategoriaEntity(7L, "novaCategoria2", novoTexto);
+        when(categoriaService.registrarCategoria(any(CategoriaEntity.class)))
+            .thenThrow(new RuntimeException("Erro ao registrar categoria"));
+
+        ResponseEntity<CategoriaEntity> categoriaRegistradaErro = categoriaController.registrar(novaCategoria);
+        assertEquals(HttpStatus.BAD_REQUEST, categoriaRegistradaErro.getStatusCode());
+        assertNull(categoriaRegistradaErro.getBody());
+    }
+
+    @Test
     @DisplayName("Teste que lista todas as categorias")
     void listarCategoriasTest() {
         List<CategoriaEntity> listaCategorias = new ArrayList<>();
@@ -81,6 +93,16 @@ public class CategoriaControllerTests {
         ResponseEntity<List<CategoriaEntity>> lista = this.categoriaController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(3, lista.getBody().size());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar listar todas as categorias")
+    void listarCategoriasTestErro() {
+        when(categoriaService.listAllCategoria()).thenThrow(new RuntimeException("Erro ao listar categorias"));
+
+        ResponseEntity<List<CategoriaEntity>> lista = this.categoriaController.listAll();
+        assertEquals(HttpStatus.BAD_REQUEST, lista.getStatusCode());
+        assertNull(lista.getBody());
     }
 
     @Test

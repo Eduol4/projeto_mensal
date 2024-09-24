@@ -5,9 +5,10 @@ import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class TextoControllerTests {
     @MockBean
     TextoRepository textoRepository;
 
-    @BeforeEach
-    void setUp() {
+    // @BeforeEach
+    // void setUp() {
         // List<TextoEntity> listaTexto = new ArrayList<>();
         // UsuarioEntity autor1 = new UsuarioEntity();
         // List<TagEntity> tag1 = new ArrayList<>();
@@ -51,7 +52,7 @@ public class TextoControllerTests {
         // TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", null, null, null);
         // when(textoRepository.findByCategoria_TituloCategoria(categoria1)).thenReturn(Optional.of(textoEntity1));
         // when(textoRepository.findById(4L)).thenReturn(Optional.of(textoEntity1));
-    }
+    // }
 
     @Test
     @DisplayName("Teste que registra um texto")
@@ -65,6 +66,21 @@ public class TextoControllerTests {
         ResponseEntity<TextoEntity> textoRegistrado = textoController.registrar(novoTexto);
         assertEquals(HttpStatus.OK, textoRegistrado.getStatusCode());
         assertEquals(novoTexto, textoRegistrado.getBody());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao registrar um texto")
+    void registrarTextoTestErro() {
+        UsuarioEntity novoAutor = new UsuarioEntity();
+        CategoriaEntity novaCategoria = new CategoriaEntity();
+        List<TagEntity> novaTag = new ArrayList<>();
+        TextoEntity novoTexto = new TextoEntity(6L, "Texto Novo2", "Conteudo novo2", novoAutor, novaTag, novaCategoria);
+        when(textoService.registrarTexto(any(TextoEntity.class)))
+            .thenThrow(new RuntimeException("Erro ao registrar texto"));
+
+        ResponseEntity<TextoEntity> textoRegistradoErro = textoController.registrar(novoTexto);
+        assertEquals(HttpStatus.BAD_REQUEST, textoRegistradoErro.getStatusCode());
+        assertNull(textoRegistradoErro.getBody());
     }
 
     @Test
@@ -85,6 +101,16 @@ public class TextoControllerTests {
         ResponseEntity<List<TextoEntity>> lista = this.textoController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(2, lista.getBody().size());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar listar todos os textos")
+    void listarTextosTestErro() {
+        when(textoService.listAllTexto()).thenThrow(new RuntimeException("Erro ao listar textos"));
+
+        ResponseEntity<List<TextoEntity>> lista = this.textoController.listAll();
+        assertEquals(HttpStatus.BAD_REQUEST, lista.getStatusCode());
+        assertNull(lista.getBody());
     }
 
     @Test

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.services.TextoService;
 
@@ -93,7 +92,7 @@ public class TextoController {
 		}
 	}
 
-	@PutMapping("/alterarTitulo/{idTitulo}")
+	@PutMapping("/alterarTexto/{idTexto}")
 	public ResponseEntity<TextoEntity> alterar(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
 		try {
 			TextoEntity textoAlterado = textoService.alterarTexto(idTexto, novaTextoEntity);

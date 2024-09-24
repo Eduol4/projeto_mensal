@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -64,6 +66,19 @@ public class TagControllerTests {
     }
 
     @Test
+    @DisplayName("Testa um erro ao registrar uma tag")
+    void registrarTagTestErro() {
+        List<TextoEntity> novoTexto = new ArrayList<>();
+        TagEntity novaTag = new TagEntity(7L, "novaTag2", novoTexto);
+        when(tagService.registrarTag(any(TagEntity.class)))
+            .thenThrow(new RuntimeException("Erro ao registrar tag"));
+
+        ResponseEntity<TagEntity> tagRegistradaErro = tagController.registrar(novaTag);
+        assertEquals(HttpStatus.BAD_REQUEST, tagRegistradaErro.getStatusCode());
+        assertNull(tagRegistradaErro.getBody());
+    }
+
+    @Test
     @DisplayName("Teste que lista todas as tags")
     void listarTagsTest() {
         List<TagEntity> listaTags = new ArrayList<>();
@@ -79,6 +94,16 @@ public class TagControllerTests {
         ResponseEntity<List<TagEntity>> lista = this.tagController.listAll();
         assertEquals(HttpStatus.OK, lista.getStatusCode());
         assertEquals(3, lista.getBody().size());
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar listar todas as tags")
+    void listarTagsTestErro() {
+        when(tagService.listAllTag()).thenThrow(new RuntimeException("Erro ao listar tags"));
+
+        ResponseEntity<List<TagEntity>> lista = this.tagController.listAll();
+        assertEquals(HttpStatus.BAD_REQUEST, lista.getStatusCode());
+        assertNull(lista.getBody());
     }
 
     @Test
