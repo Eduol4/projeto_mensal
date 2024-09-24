@@ -158,26 +158,22 @@ public class TextoServiceTest {
         // verify(textoRepository, times(1)).findByTag_TituloTag("Tag de Teste");
     }
 
-    // @Test
-    // @DisplayName("Teste que busca textos por categoria")
-    // void buscarTextoPorCategoriaTest() {
-    //     List<TextoEntity> textoByTag = new ArrayList<>();
-    //     CategoriaEntity categorias = new CategoriaEntity();
+    @Test
+    @DisplayName("Teste que busca textos por categoria")
+    void buscarTextoPorCategoriaTest() {
+        List<TextoEntity> textosByCategoria = new ArrayList<>();
+        CategoriaEntity categorias = new CategoriaEntity(1L, "Categoria de Teste", new ArrayList<>());
 
-    //     CategoriaEntity categoria = new CategoriaEntity(1L, "Categoria de Teste", new ArrayList<>());
-    //     categorias.add(categoria);
+        textosByCategoria.add(new TextoEntity(1L, "TítuloByCategoria1", "ConteúdoByCategoria1", null, null, categorias));
+        textosByCategoria.add(new TextoEntity(2L, "TítuloByCategoria2", "ConteúdoByCategoria2", null, null, categorias));
+        when(textoRepository.findByCategoria_TituloCategoria("Categoria de Teste")).thenReturn(textosByCategoria);
 
-    //     textoByCategoria.add(new TextoEntity(1L, "TítuloByCategoria1", "ConteúdoByCategoria1", null, null, categorias));
-    //     textoByCategoria.add(new TextoEntity(2L, "TítuloByCategoria2", "ConteúdoByCategoria2", null, null, categorias));
-    //     when(textoRepository.findByCategoria_TituloCategoria("Categoria de Teste")).thenReturn(textoByCategoria);
-
-    //     List<TextoEntity> textosResultado = textoService.buscarTextoCategoria("Categoria de Teste");
-
-    //     assertEquals(2, textosResultado.size());
-    //     assertEquals("TítuloByCategoria1", textosResultado.get(0).getTituloTexto());
-    //     assertEquals("TítuloByCategoria2", textosResultado.get(1).getTituloTexto());
+        List<TextoEntity> textosResultado = textoService.buscarTextoCategoria("Categoria de Teste");
+        assertEquals(2, textosResultado.size());
+        assertEquals("TítuloByCategoria1", textosResultado.get(0).getTituloTexto());
+        assertEquals("TítuloByCategoria2", textosResultado.get(1).getTituloTexto());
 
         // verify(textoRepository, times(1)).findByCategoria_TituloCategoria("Categoria de Teste");
-    // }
+    }
 }
 

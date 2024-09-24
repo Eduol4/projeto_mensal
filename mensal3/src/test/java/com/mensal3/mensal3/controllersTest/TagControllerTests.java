@@ -11,8 +11,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -133,10 +135,9 @@ public class TagControllerTests {
     // void deletarTagById() {
     //     List<TextoEntity> textoTeste1 = new ArrayList<>();
     //     TagEntity tagEntity1 = new TagEntity(4L, "Tag teste", textoTeste1);
-    //     when(tagService.findById(4L)).thenReturn(tagEntity1);
-
-    //     ResponseEntity<Void> tagByIdErro = this.tagController.delete(4L);
-    //     assertEquals(HttpStatus.NO_CONTENT, tagByIdErro.getStatusCode());
+    //     Mockito.doNothing().when(tagService);
+    //     var data = tagController.delete(4L);
+    //     Assertions.assertEquals(HttpStatus.ACCEPTED, data.getStatusCode());
     // }
 
     // @Test

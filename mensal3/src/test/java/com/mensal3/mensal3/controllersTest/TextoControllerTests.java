@@ -172,4 +172,84 @@ public class TextoControllerTests {
         assertNull(resposta.getBody());
     }
 
+    @Test
+    @DisplayName("Teste que busca textos por tag")
+    void buscarTextoPorTagTest() {
+        List<TextoEntity> textoByTag = new ArrayList<>();
+        textoByTag.add(new TextoEntity(1L, "TítuloByTag1", "ConteúdoByTag1", null, null, null));
+        textoByTag.add(new TextoEntity(2L, "TítuloByTag2", "ConteúdoByTag2", null, null, null));
+        when(textoService.buscarTextoTag("TagTeste")).thenReturn(textoByTag);
+
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarTag("TagTeste");
+        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+        assertEquals(2, resposta.getBody().size());
+        assertEquals("TítuloByTag1", resposta.getBody().get(0).getTituloTexto());
+        assertEquals("TítuloByTag2", resposta.getBody().get(1).getTituloTexto());
+
+        // verify(textoService, times(1)).buscarTextoTag("TagTeste");
+    }
+
+    @Test
+    @DisplayName("Testa um NO CONTENT ao buscar textos por tag")
+    void buscarTextoPorTagTestNoContent() {
+        when(textoService.buscarTextoTag("TagVazia")).thenReturn(new ArrayList<>());
+
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarTag("TagVazia");
+        assertEquals(HttpStatus.NO_CONTENT, resposta.getStatusCode());
+        assertNull(resposta.getBody());
+
+        // verify(textoService, times(1)).buscarTextoTag("TagVazia");
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar por tag")
+    void buscarTextoPorTagTestErro() {
+        when(textoService.buscarTextoTag("TagErrada")).thenThrow(new RuntimeException("Erro"));
+
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarTag("TagErrada");
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertNull(resposta.getBody());
+
+        // verify(textoService, times(1)).buscarTextoTag("TagErro");
+    }
+
+    @Test
+    @DisplayName("Teste que busca textos por categoria")
+    void buscarTextoPorCategoriaTest() {
+        List<TextoEntity> textosByCategoria = new ArrayList<>();
+        textosByCategoria.add(new TextoEntity(1L, "TítuloByCategoria1", "ConteúdoByCategoria1", null, null, null));
+        textosByCategoria.add(new TextoEntity(2L, "TítuloByCategoria2", "ConteúdoByCategoria2", null, null, null));
+        when(textoService.buscarTextoCategoria("CategoriaTeste")).thenReturn(textosByCategoria);
+
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarCategoria("CategoriaTeste");
+        assertEquals(HttpStatus.OK, resposta.getStatusCode());
+        assertEquals(2, resposta.getBody().size());
+        assertEquals("TítuloByCategoria1", resposta.getBody().get(0).getTituloTexto());
+        assertEquals("TítuloByCategoria2", resposta.getBody().get(1).getTituloTexto());
+
+        // verify(textoService, times(1)).buscarTextoCategoria("CategoriaTeste");
+    }
+
+    @Test
+    @DisplayName("Testa um NO CONTENT ao buscar textos por categoria")
+    void buscarTextoPorCategoriaTestNoContent() {
+        when(textoService.buscarTextoCategoria("CategoriaVazia")).thenReturn(new ArrayList<>());
+
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarCategoria("CategoriaVazia");
+        assertEquals(HttpStatus.NO_CONTENT, resposta.getStatusCode());
+        assertNull(resposta.getBody());
+
+        // verify(textoService, times(1)).buscarTextoCategoria("CategoriaVazia");
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar buscar textos por categoria")
+    void buscarTextoPorCategoriaTestErro() {
+        when(textoService.buscarTextoCategoria("CategoriaErro")).thenThrow(new RuntimeException("Erro"));
+        ResponseEntity<List<TextoEntity>> resposta = textoController.buscarCategoria("CategoriaErro");
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertNull(resposta.getBody());
+
+        // verify(textoService, times(1)).buscarTextoCategoria("CategoriaErro");
+    }
 }
