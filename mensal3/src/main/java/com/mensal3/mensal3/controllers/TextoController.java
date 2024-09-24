@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.services.TextoService;
 
@@ -42,6 +43,15 @@ public class TextoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
+
+	@GetMapping("/buscarTexto/{idTexto}")
+	public ResponseEntity<TextoEntity> findById(@PathVariable Long idTexto) {
+		try {
+			return ResponseEntity.ok(textoService.findById(idTexto));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 	
     @GetMapping("/buscarTag/{tagName}")
     public ResponseEntity<List<TextoEntity>> buscarTag(@PathVariable String tagName) {
@@ -57,15 +67,6 @@ public class TextoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
-
-	@GetMapping("/buscarTexto/{idTexto}")
-	public ResponseEntity<TextoEntity> findById(@PathVariable Long idTexto) {
-		try {
-			return ResponseEntity.ok(textoService.findById(idTexto));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-	}
 
     @GetMapping("/buscarCategoria/{categoriaName}")
     public ResponseEntity<List<TextoEntity>> buscarCategoria(@PathVariable String categoriaName) {
@@ -91,24 +92,34 @@ public class TextoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
-	
-	@PutMapping("/alterarTitulo/{idTexto}")
-	public ResponseEntity<TextoEntity> alterarTitulo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+
+	@PutMapping("/alterarTitulo/{idTitulo}")
+	public ResponseEntity<TextoEntity> alterar(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
 		try {
-			TextoEntity textoAlterada = textoService.alterarTitulo(idTexto, novaTextoEntity);
-			return ResponseEntity.ok(textoAlterada);
+			TextoEntity textoAlterado = textoService.alterarTexto(idTexto, novaTextoEntity);
+			return ResponseEntity.ok(textoAlterado);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
 	
-	@PutMapping("/alterarConteudo/{idTexto}")
-	public ResponseEntity<TextoEntity> alterarConteudo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
-		try {
-			TextoEntity textoAlterada = textoService.alterarConteudo(idTexto, novaTextoEntity);
-			return ResponseEntity.ok(textoAlterada);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-	}
+	// @PutMapping("/alterarTitulo/{idTexto}")
+	// public ResponseEntity<TextoEntity> alterarTitulo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+	// 	try {
+	// 		TextoEntity textoAlterada = textoService.alterarTitulo(idTexto, novaTextoEntity);
+	// 		return ResponseEntity.ok(textoAlterada);
+	// 	} catch (Exception e) {
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	// 	}
+	// }
+	
+	// @PutMapping("/alterarConteudo/{idTexto}")
+	// public ResponseEntity<TextoEntity> alterarConteudo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+	// 	try {
+	// 		TextoEntity textoAlterada = textoService.alterarConteudo(idTexto, novaTextoEntity);
+	// 		return ResponseEntity.ok(textoAlterada);
+	// 	} catch (Exception e) {
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	// 	}
+	// }
 }

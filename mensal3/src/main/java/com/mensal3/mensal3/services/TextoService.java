@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.repositories.TextoRepository;
 
@@ -41,15 +42,14 @@ public class TextoService {
 		
 		textoRepository.delete(textoEntity);
 	}
-	
-	public TextoEntity alterarTitulo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
+
+	public TextoEntity alterarTexto(Long idTexto, TextoEntity novoTextoEntity) throws Exception{
 		Optional<TextoEntity> textoExistenteOpt = textoRepository.findById(idTexto);
 		
 		if (textoExistenteOpt.isPresent()) {
 			TextoEntity textoExistente = textoExistenteOpt.get();
-			
-			textoExistente.setTituloTexto(novaTextoEntity.getTituloTexto());
-			
+			textoExistente.setTituloTexto(novoTextoEntity.getTituloTexto());
+			textoExistente.setConteudoTexto(novoTextoEntity.getConteudoTexto());
 			return textoRepository.save(textoExistente);
 		}
 		else {
@@ -57,18 +57,33 @@ public class TextoService {
 		}
 	}
 	
-	public TextoEntity alterarConteudo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
-		Optional<TextoEntity> textoExistenteOpt = textoRepository.findById(idTexto);
+	// public TextoEntity alterarTitulo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
+	// 	Optional<TextoEntity> textoExistenteOpt = textoRepository.findById(idTexto);
 		
-		if (textoExistenteOpt.isPresent()) {
-			TextoEntity textoExistente = textoExistenteOpt.get();
+	// 	if (textoExistenteOpt.isPresent()) {
+	// 		TextoEntity textoExistente = textoExistenteOpt.get();
 			
-			textoExistente.setConteudoTexto(novaTextoEntity.getConteudoTexto());
+	// 		textoExistente.setTituloTexto(novaTextoEntity.getTituloTexto());
 			
-			return textoRepository.save(textoExistente);
-		}
-		else {
-			throw new Exception("Texto não encontrado!");
-		}
-	}
+	// 		return textoRepository.save(textoExistente);
+	// 	}
+	// 	else {
+	// 		throw new Exception("Texto não encontrado!");
+	// 	}
+	// }
+	
+	// public TextoEntity alterarConteudo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
+	// 	Optional<TextoEntity> textoExistenteOpt = textoRepository.findById(idTexto);
+		
+	// 	if (textoExistenteOpt.isPresent()) {
+	// 		TextoEntity textoExistente = textoExistenteOpt.get();
+			
+	// 		textoExistente.setConteudoTexto(novaTextoEntity.getConteudoTexto());
+			
+	// 		return textoRepository.save(textoExistente);
+	// 	}
+	// 	else {
+	// 		throw new Exception("Texto não encontrado!");
+	// 	}
+	// }
 }

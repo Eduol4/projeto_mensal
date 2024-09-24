@@ -105,6 +105,34 @@ public class TextoServiceTest {
         });
 
         assertEquals("Texto não encontrado!", exception.getMessage());
-        // verify(usuarioRepository, times(0)).delete(any(UsuarioEntity.class));
+        // verify(textoRepository, times(0)).delete(any(textoEntity.class));
+    }
+
+    @Test
+    @DisplayName("Teste para alterar um Texto pelo Id")
+    void alterarTextoTest() throws Exception {
+        TextoEntity textoVelho = new TextoEntity(15L, "Texto velho", "Conteudo velho", null, null, null);
+        TextoEntity novoTexto = new TextoEntity(15L, "Texto novo", "Conteudo novo", null, null, null);
+
+        when(textoRepository.findById(15L)).thenReturn(Optional.of(textoVelho));
+        when(textoRepository.save(textoVelho)).thenReturn(novoTexto);
+    
+        TextoEntity textoAlterado = textoService.alterarTexto(15L, novoTexto);
+        assertEquals("Texto novo", textoAlterado.getTituloTexto());
+        assertEquals("Conteudo novo", textoAlterado.getConteudoTexto());
+    
+        // verify(textoRepository, times(1)).findById(1L);
+        // verify(textoRepository, times(1)).save(textoVelho);
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao alterar um Texto pelo Id")
+    void alterarTextoTestErro() {
+        when(textoRepository.findById(20L)).thenReturn(Optional.empty());
+    
+        assertThrows(Exception.class, () -> textoService.alterarTexto(20L, new TextoEntity(20L, "Texto novo", "Conteudo novo", null, null, null)));
+    
+        // verify(textoRepository, times(1)).findById(1L);
+        // verify(textoRepository, never()).save(any());
     }
 }
