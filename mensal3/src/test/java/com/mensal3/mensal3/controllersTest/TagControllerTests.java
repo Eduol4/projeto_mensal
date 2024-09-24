@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -158,5 +159,18 @@ public class TagControllerTests {
     assertEquals(novaTag, resposta.getBody());
 
     // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar alterar tag pelo Id")
+        void alterarTagByIdErro() throws Exception {
+        List<TextoEntity> textoAlteracao = new ArrayList<>();
+        TagEntity novaTag = new TagEntity(11L, "Tag Nova2", textoAlteracao);
+
+        doThrow(new Exception("Tag 11 não encontrada!")).when(tagService).alterarTag(11L, novaTag);
+
+        ResponseEntity<TagEntity> resposta = tagController.alterar(11L, novaTag);
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertNull(resposta.getBody());
     }
 }

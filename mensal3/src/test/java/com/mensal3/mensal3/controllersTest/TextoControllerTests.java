@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
@@ -148,8 +149,8 @@ public class TextoControllerTests {
     // }
 
     @Test
-    @DisplayName("Teste para alteração de tags pelo Id")
-    void alterarTagById() throws Exception {
+    @DisplayName("Teste para alteração de textos pelo Id")
+    void alterarTextoById() throws Exception {
         TextoEntity novoTexto = new TextoEntity(10L, "Titulo", "Conteudo", null, null, null);
         when(textoService.alterarTexto(10L, novoTexto)).thenReturn(novoTexto);
     
@@ -158,6 +159,17 @@ public class TextoControllerTests {
         assertEquals(novoTexto, resposta.getBody());
 
         // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar alterar texto pelo Id")
+    void alterarTextoByIdErro() throws Exception {
+        TextoEntity novaTexto = new TextoEntity(11L, "Texto Novo2", "Conteudo Novo2", null, null, null);
+        doThrow(new Exception("Texto 11 não encontrado!")).when(textoService).alterarTexto(11L, novaTexto);
+    
+        ResponseEntity<TextoEntity> resposta = textoController.alterar(11L, novaTexto);
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertNull(resposta.getBody());
     }
 
 }

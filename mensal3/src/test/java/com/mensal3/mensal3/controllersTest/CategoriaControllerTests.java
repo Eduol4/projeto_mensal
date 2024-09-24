@@ -3,6 +3,7 @@ package com.mensal3.mensal3.controllersTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -152,5 +153,18 @@ public class CategoriaControllerTests {
     assertEquals(novaCategoria, resposta.getBody());
 
     // verify(categoriaService, times(1)).alterarCategoria(eq(1L), any(CategoriaEntity.class));
+    }
+
+    @Test
+    @DisplayName("Testa um erro ao tentar alterar categoria pelo Id")
+    void alterarCategoriaByIdErro() throws Exception {
+        List<TextoEntity> textoAlteracao = new ArrayList<>();
+        CategoriaEntity novaCategoria = new CategoriaEntity(11L, "Categoria Nova2", textoAlteracao);
+        doThrow(new Exception("Categoria 11 não encontrada!")).when(categoriaService).alterarCategoria(11L, novaCategoria);
+    
+        // Executa a chamada do controlador e verifica se o status é BAD_REQUEST
+        ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(11L, novaCategoria);
+        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+        assertNull(resposta.getBody());
     }
 }
