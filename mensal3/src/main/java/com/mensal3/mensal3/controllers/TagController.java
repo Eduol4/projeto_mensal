@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +25,7 @@ public class TagController {
 	private TagService tagService;
 	
 	@PostMapping("/registrarTag")
-	public ResponseEntity<TagEntity> registrar(@Validated @RequestBody TagEntity tagEntity) {
+	public ResponseEntity<TagEntity> registrar(@RequestBody TagEntity tagEntity) {
 		try {
 			return ResponseEntity.ok(tagService.registrarTag(tagEntity));
 		} catch (Exception e) {

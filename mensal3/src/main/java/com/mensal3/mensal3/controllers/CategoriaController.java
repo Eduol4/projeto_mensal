@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,7 +25,7 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 	
 	@PostMapping("/registrarCategoria")
-	public ResponseEntity<CategoriaEntity> registrar(@Validated @RequestBody CategoriaEntity categoriaEntity) {
+	public ResponseEntity<CategoriaEntity> registrar(@RequestBody CategoriaEntity categoriaEntity) {
 		try {
 			return ResponseEntity.ok(categoriaService.registrarCategoria(categoriaEntity));
 		} catch (Exception e) {
@@ -33,6 +33,7 @@ public class CategoriaController {
 		}
 	}
 	
+	@GetMapping("/listarCategorias")
 	public ResponseEntity<List<CategoriaEntity>> listAll() {
 		try {
 			return ResponseEntity.ok(categoriaService.listAllCategoria());
@@ -41,7 +42,8 @@ public class CategoriaController {
 		}
 	}
 
-	public ResponseEntity<CategoriaEntity> findById(Long idCategoria) {
+	@GetMapping("/buscarCategoria/{idCategoria}")
+	public ResponseEntity<CategoriaEntity> findById(@PathVariable Long idCategoria) {
 		try {
 			return ResponseEntity.ok(categoriaService.findById(idCategoria));
 		} catch (Exception e) {
