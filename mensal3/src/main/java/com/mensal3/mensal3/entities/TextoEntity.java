@@ -2,15 +2,7 @@ package com.mensal3.mensal3.entities;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "texto")
@@ -68,7 +60,7 @@ public class TextoEntity {
 	public void setConteudoTexto(String conteudoTexto) {
 		this.conteudoTexto = conteudoTexto;
 	}
-	
+
 	public Long getIdTexto() {
 		return idTexto;
 	}
@@ -96,4 +88,16 @@ public class TextoEntity {
 	public void setCategoria(CategoriaEntity categoria) {
 		this.categoria = categoria;
 	}
+
+	@OneToMany(mappedBy = "texto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ComentarioEntity> comentarios;
+
+	public List<ComentarioEntity> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<ComentarioEntity> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 }
