@@ -1,55 +1,45 @@
 package com.mensal3.mensal3.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-@Entity(name = "comentario")
+@Entity
 public class ComentarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idComentario;
+    private Long id;
 
-    @NotBlank
-    @Column(name = "conteudoComentario")
-    private String conteudoComentario;
+    @Column(nullable = false)
+    private String conteudo;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
+    @JoinColumn(name = "autor_id", nullable = false)
     private UsuarioEntity autor;
 
     @ManyToOne
-    @JoinColumn(name = "texto_id")
+    @JoinColumn(name = "texto_id", nullable = false)
     private TextoEntity texto;
 
-    @Column(name = "dataComentario")
+    @Column(nullable = false)
     private LocalDateTime dataComentario;
 
-    public ComentarioEntity() {
+    // Getters and setters
+
+    public Long getId() {
+        return id;
     }
 
-    public ComentarioEntity(String conteudoComentario, UsuarioEntity autor, TextoEntity texto, LocalDateTime dataComentario) {
-        this.conteudoComentario = conteudoComentario;
-        this.autor = autor;
-        this.texto = texto;
-        this.dataComentario = dataComentario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdComentario() {
-        return idComentario;
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setIdComentario(Long idComentario) {
-        this.idComentario = idComentario;
-    }
-
-    public String getConteudoComentario() {
-        return conteudoComentario;
-    }
-
-    public void setConteudoComentario(String conteudoComentario) {
-        this.conteudoComentario = conteudoComentario;
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 
     public UsuarioEntity getAutor() {

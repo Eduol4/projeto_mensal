@@ -1,5 +1,6 @@
 package com.mensal3.mensal3.controllers;
 
+import com.mensal3.mensal3.dto.ComentarioDTO;
 import com.mensal3.mensal3.entities.ComentarioEntity;
 import com.mensal3.mensal3.services.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class ComentarioController {
     private ComentarioService comentarioService;
 
     @PostMapping("/registrarComentario")
-    public ResponseEntity<ComentarioEntity> registrarComentario(@Validated @RequestBody ComentarioEntity comentarioEntity) {
+    public ResponseEntity<ComentarioEntity> registrarComentario(@Validated @RequestBody ComentarioDTO comentarioDTO) {
         try {
-            return ResponseEntity.ok(comentarioService.registrarComentario(comentarioEntity));
+            return ResponseEntity.ok(comentarioService.registrarComentario(comentarioDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
