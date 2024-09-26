@@ -6,8 +6,6 @@ public class ComentarioDTO {
     private Long autorId;
     private Long textoId;
 
-    // Getters and setters
-
     public String getConteudo() {
         return conteudo;
     }

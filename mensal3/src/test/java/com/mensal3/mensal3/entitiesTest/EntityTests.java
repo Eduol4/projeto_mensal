@@ -3,6 +3,7 @@ package com.mensal3.mensal3.entitiesTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mensal3.mensal3.entities.CategoriaEntity;
+import com.mensal3.mensal3.entities.ComentarioEntity;
 import com.mensal3.mensal3.entities.TagEntity;
 import com.mensal3.mensal3.entities.TextoEntity;
 import com.mensal3.mensal3.entities.UsuarioEntity;
@@ -59,6 +61,12 @@ public class EntityTests {
         textoEntity.setCategoria(categoria);
         assertEquals(categoria, textoEntity.getCategoria());
 
+        List<ComentarioEntity> comentarios = new ArrayList<>();
+        comentarios.add(new ComentarioEntity());
+        comentarios.add(new ComentarioEntity());
+        textoEntity.setComentarios(comentarios);
+        assertEquals(comentarios, textoEntity.getComentarios());
+
         //TAG
         TagEntity tagEntity = new TagEntity();
         Long idTag = 1L;
@@ -78,5 +86,34 @@ public class EntityTests {
         List<TextoEntity> textos3 = new ArrayList<>();
         categoriaEntity.setTexto(textos3);
         assertEquals(textos3, categoriaEntity.getTexto());
+    }
+
+    @Test
+    @DisplayName("Teste para as entities de Comentários")
+    void comentariosEntityTest() {
+        ComentarioEntity comentario = new ComentarioEntity();
+        comentario.setId(1L);
+        assertEquals(1L, comentario.getId());
+
+        ComentarioEntity comentario1 = new ComentarioEntity();
+        comentario1.setConteudo("Conteúdo de teste");
+        assertEquals("Conteúdo de teste", comentario1.getConteudo());
+
+        ComentarioEntity comentario2 = new ComentarioEntity();
+        UsuarioEntity autor2 = new UsuarioEntity();
+        autor2.setNomeUsuario("Autor Teste");
+        comentario2.setAutor(autor2);
+        assertEquals(autor2, comentario2.getAutor());
+
+        ComentarioEntity comentario3 = new ComentarioEntity();
+        TextoEntity texto2 = new TextoEntity();
+        texto2.setTituloTexto("Título do Texto");
+        comentario3.setTexto(texto2);
+        assertEquals(texto2, comentario3.getTexto());
+
+        ComentarioEntity comentario4 = new ComentarioEntity();
+        LocalDateTime data = LocalDateTime.now();
+        comentario4.setDataComentario(data);
+        assertEquals(data, comentario4.getDataComentario());
     }
 }
