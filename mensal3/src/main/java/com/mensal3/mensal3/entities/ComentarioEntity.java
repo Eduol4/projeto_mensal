@@ -24,8 +24,6 @@ public class ComentarioEntity {
     @Column(nullable = false)
     private LocalDateTime dataComentario;
 
-    // Getters and setters
-
     public Long getId() {
         return id;
     }

@@ -25,7 +25,6 @@ public class ComentarioService {
     @Autowired
     private TextoRepository textoRepository;
 
-    // Método para registrar um comentário
     public ComentarioEntity registrarComentario(ComentarioDTO comentarioDTO) throws Exception {
         UsuarioEntity autor = usuarioRepository.findById(comentarioDTO.getAutorId())
                 .orElseThrow(() -> new Exception("Autor não encontrado"));
@@ -42,12 +41,10 @@ public class ComentarioService {
         return comentarioRepository.save(comentarioEntity);
     }
 
-    // Listar comentários de um texto específico
     public List<ComentarioEntity> listarComentarios(Long idTexto) {
         return comentarioRepository.findByTexto_IdTexto(idTexto);
     }
 
-    // Deletar um comentário
     public void deletarComentario(Long idComentario) throws Exception {
         ComentarioEntity comentario = comentarioRepository.findById(idComentario)
                 .orElseThrow(() -> new Exception("Comentário não encontrado"));
