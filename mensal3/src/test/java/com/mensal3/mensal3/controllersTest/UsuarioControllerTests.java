@@ -25,7 +25,7 @@ import com.mensal3.mensal3.services.UsuarioService;
 
 @SpringBootTest
 public class UsuarioControllerTests {
-    @MockBean
+    @Autowired
     UsuarioService usuarioService;
 
     @Autowired
@@ -33,24 +33,6 @@ public class UsuarioControllerTests {
 
     @MockBean
     UsuarioRepository usuarioRepository;
-
-    // @BeforeEach
-    // void setUp() {
-        // List<UsuarioEntity> listaUser = new ArrayList<>();
-        // List<TextoEntity> textoTeste =  new ArrayList<>();
-        // List<TextoEntity> textoTeste2 =  new ArrayList<>();
-        // List<TextoEntity> textoTeste3 =  new ArrayList<>();
-
-        // listaUser.add(new UsuarioEntity(1L, "Teste", "senhaTeste", textoTeste));
-        // listaUser.add(new UsuarioEntity(2L, "Testa", "senhoTesta", textoTeste2));
-        // listaUser.add(new UsuarioEntity(3L, "Senhor Teste", "senha testosa", textoTeste3));
-        // when(usuarioRepository.findAll()).thenReturn(listaUser);
-
-        // UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
-        // UsuarioEntity usuarioEntity2 = new UsuarioEntity(5L, "Braba", "senhoBrabo", null);
-        // when(usuarioRepository.findById(4L)).thenReturn(Optional.of(usuarioEntity));
-        // when(usuarioRepository.findById(5L)).thenReturn(Optional.of(usuarioEntity2));
-    // }
 
     @Test
     @DisplayName("Teste que registra um usuário")
@@ -125,21 +107,3 @@ public class UsuarioControllerTests {
         assertEquals(HttpStatus.BAD_REQUEST, UserByIdErro.getStatusCode());
     }
 }
-
-//     @Test
-//     @DisplayName("Teste para deletar um usuário pelo Id")
-//     void deletarUserByIdTest() {
-//         UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
-//         Mockito.when(usuarioService.deleteUsuario(4L)).doThrow(RuntimeException.class);
-
-//         ResponseEntity<Void> deletedUser = this.usuarioController.delete(4L);
-//         assertEquals(HttpStatus.NO_CONTENT, deletedUser.getStatusCode());
-//     }
-
-//     @Test
-//     @DisplayName("Testa um erro ao deletar um usuário pelo Id")
-//     void deletarUserByIdTestErro() {
-//         ResponseEntity<Void> deletedUser = this.usuarioController.delete(69L);
-//         assertEquals(HttpStatus.BAD_REQUEST, deletedUser.getStatusCode());
-//     }
-// }

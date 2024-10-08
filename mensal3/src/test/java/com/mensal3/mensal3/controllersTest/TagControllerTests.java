@@ -11,10 +11,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Assertions;
+// import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+// import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,7 +29,7 @@ import com.mensal3.mensal3.services.TagService;
 
 @SpringBootTest
 public class TagControllerTests {
-    @MockBean
+    @Autowired
     TagService tagService;
     
     @Autowired
@@ -37,24 +37,6 @@ public class TagControllerTests {
 
     @MockBean
     TagRepository tagRepository;
-
-    // @BeforeEach
-    // void setUp() {
-        // List<TagEntity> listaTags = new ArrayList<>();
-        // List<TextoEntity> textoTeste1 = new ArrayList<>();
-        // List<TextoEntity> textoTeste2 = new ArrayList<>();
-        // List<TextoEntity> textoTeste3 = new ArrayList<>();
-
-        // listaTags.add(new TagEntity(1L, "Titulo Teste", textoTeste1));
-        // listaTags.add(new TagEntity(2L, "Titulo Horrível", textoTeste2));
-        // listaTags.add(new TagEntity(3L, "Titulo Maravilhoso", textoTeste3));
-        // when(tagRepository.findAll()).thenReturn(listaTags);
-
-        // TagEntity tagEntity1 = new TagEntity(4L, "Tag teste", textoTeste1);
-        // TagEntity tagEntity2 = new TagEntity(5L, "Teste tag", textoTeste2);
-        // when(tagRepository.findById(4L)).thenReturn(Optional.of(tagEntity1));
-        // when(tagRepository.findById(5L)).thenReturn(Optional.of(tagEntity2));
-    // }
 
     @Test
     @DisplayName("Teste que registra uma tag")
@@ -129,23 +111,6 @@ public class TagControllerTests {
         ResponseEntity<TagEntity> TagByIdErro = this.tagController.findById(10L);
         assertEquals(HttpStatus.BAD_REQUEST, TagByIdErro.getStatusCode());
     }
-
-    // @Test
-    // @DisplayName("Teste para deletar tags pelo Id")
-    // void deletarTagById() {
-    //     List<TextoEntity> textoTeste1 = new ArrayList<>();
-    //     TagEntity tagEntity1 = new TagEntity(4L, "Tag teste", textoTeste1);
-    //     Mockito.doNothing().when(tagService);
-    //     var data = tagController.delete(4L);
-    //     Assertions.assertEquals(HttpStatus.ACCEPTED, data.getStatusCode());
-    // }
-
-    // @Test
-    // @DisplayName("Testa um erro ao deletar uma tag pelo Id")
-    // void deletarTagByIdTestErro() {
-    //     ResponseEntity<Void> tagByIdErro = this.tagController.delete(69L);
-    //     assertEquals(HttpStatus.BAD_REQUEST, tagByIdErro.getStatusCode());
-    // }
 
     @Test
     @DisplayName("Teste para alteração de tags pelo Id")

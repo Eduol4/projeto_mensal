@@ -28,7 +28,7 @@ import com.mensal3.mensal3.services.TextoService;
 
 @SpringBootTest
 public class TextoControllerTests {
-    @MockBean
+    @Autowired
     TextoService textoService;
     
     @Autowired
@@ -36,24 +36,6 @@ public class TextoControllerTests {
 
     @MockBean
     TextoRepository textoRepository;
-
-    // @BeforeEach
-    // void setUp() {
-        // List<TextoEntity> listaTexto = new ArrayList<>();
-        // UsuarioEntity autor1 = new UsuarioEntity();
-        // List<TagEntity> tag1 = new ArrayList<>();
-        // CategoriaEntity categoria1 = new CategoriaEntity();
-        // UsuarioEntity autor2 = new UsuarioEntity();
-        // List<TagEntity> tag2 = new ArrayList<>();
-        // CategoriaEntity categoria2 = new CategoriaEntity();
-
-        // listaTexto.add(new TextoEntity(1L, "Teste", "Teste", autor1, tag1, categoria1));
-        // listaTexto.add(new TextoEntity(2L, "Texte", "Texte", autor2, tag2, categoria2));
-
-        // TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", null, null, null);
-        // when(textoRepository.findByCategoria_TituloCategoria(categoria1)).thenReturn(Optional.of(textoEntity1));
-        // when(textoRepository.findById(4L)).thenReturn(Optional.of(textoEntity1));
-    // }
 
     @Test
     @DisplayName("Teste que registra um texto")
@@ -133,20 +115,6 @@ public class TextoControllerTests {
         ResponseEntity<TextoEntity> TextoByIdErro = this.textoController.findById(10L);
         assertEquals(HttpStatus.BAD_REQUEST, TextoByIdErro.getStatusCode());
     }
-
-    // @Test
-    // @DisplayName("Teste para deletar um texto pelo Id")
-    // void deletarTextoByIdTest() {
-    //     ResponseEntity<Void> deletedTexto = this.textoController.delete(4L);
-    //     assertEquals(HttpStatus.NO_CONTENT, deletedTexto.getStatusCode());
-    // }
-
-    // @Test
-    // @DisplayName("Testa um erro ao deletar um texto pelo Id")
-    // void deletarTextoByIdTestErro() {
-    //     ResponseEntity<Void> deletedTexto = this.textoController.delete(69L);
-    //     assertEquals(HttpStatus.BAD_REQUEST, deletedTexto.getStatusCode());
-    // }
 
     @Test
     @DisplayName("Teste para alteração de textos pelo Id")

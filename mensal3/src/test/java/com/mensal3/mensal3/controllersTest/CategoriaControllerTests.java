@@ -26,7 +26,7 @@ import com.mensal3.mensal3.services.CategoriaService;
 
 @SpringBootTest
 public class CategoriaControllerTests {
-    @MockBean
+    @Autowired
     CategoriaService categoriaService;
 
     @Autowired
@@ -35,23 +35,6 @@ public class CategoriaControllerTests {
     @MockBean
     CategoriaRepository categoriaRepository;
 
-    // @BeforeEach
-    // void setUp() {
-        // List<CategoriaEntity> listaCategorias = new ArrayList<>();
-        // List<TextoEntity> textoTeste1 = new ArrayList<>();
-        // List<TextoEntity> textoTeste2 = new ArrayList<>();
-        // List<TextoEntity> textoTeste3 = new ArrayList<>();
-
-        // listaCategorias.add(new CategoriaEntity(1L, "CategoriaTeste", textoTeste1));
-        // listaCategorias.add(new CategoriaEntity(2L, "TesteCategoria", textoTeste2));
-        // listaCategorias.add(new CategoriaEntity(3L, "TeTeste", textoTeste3));
-        // when(categoriaRepository.findAll()).thenReturn(listaCategorias);
-
-        // CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
-        // CategoriaEntity categoriaEntity2 = new CategoriaEntity(5L, "Testinha", null);
-        // when(categoriaRepository.findById(4L)).thenReturn(Optional.of(categoriaEntity1));
-        // when(categoriaRepository.findById(5L)).thenReturn(Optional.of(categoriaEntity2));
-    // }
 
     @Test
     @DisplayName("Teste que registra uma categoria")
@@ -125,20 +108,6 @@ public class CategoriaControllerTests {
         ResponseEntity<CategoriaEntity> CategoriaByIdErro = this.categoriaController.findById(10L);
         assertEquals(HttpStatus.BAD_REQUEST, CategoriaByIdErro.getStatusCode());
     }
-
-    // @Test
-    // @DisplayName("Teste para deletar categorias pelo Id")
-    // void deletarCategoriaById() {
-    //     ResponseEntity<Void> categoriaByIdErro = this.categoriaController.delete(10L);
-    //     assertEquals(HttpStatus.NO_CONTENT, categoriaByIdErro.getStatusCode());
-    // }
-
-    // @Test
-    // @DisplayName("Testa um erro ao deletar uma categoria pelo Id")
-    // void deletarCategoriaByIdTestErro() {
-    //     ResponseEntity<Void> categoriaByIdErro = this.categoriaController.delete(69L);
-    //     assertEquals(HttpStatus.BAD_REQUEST, categoriaByIdErro.getStatusCode());
-    // }
 
     @Test
     @DisplayName("Teste para alteração de categorias pelo Id")

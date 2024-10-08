@@ -2,9 +2,9 @@ package com.mensal3.mensal3.servicesTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 // import static org.mockito.ArgumentMatchers.any;
-// import static org.mockito.Mockito.times;
-// import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -57,6 +57,8 @@ public class UsuarioServiceTest {
 
         UsuarioEntity usuarioRegistrado = this.usuarioService.registrarUsuario(novoUsuario);
         assertEquals(novoUsuario, usuarioRegistrado);
+
+        verify(usuarioRepository, times(1)).save(novoUsuario);
     }
 
     @Test
