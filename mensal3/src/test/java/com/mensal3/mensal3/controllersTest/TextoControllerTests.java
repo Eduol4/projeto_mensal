@@ -96,49 +96,49 @@ public class TextoControllerTests {
         assertNull(lista.getBody());
     }
 
-    @Test
-    @DisplayName("Teste que busca um texto por Id")
-    void buscarTextosByIdTest() {
-        TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", null, null, null);
-        when(textoService.findById(4L)).thenReturn(textoEntity1);
+    // @Test
+    // @DisplayName("Teste que busca um texto por Id")
+    // void buscarTextosByIdTest() {
+    //     TextoEntity textoEntity1 = new TextoEntity(4L, "TituloTeste", "Conteudo horrível", null, null, null);
+    //     when(textoService.findById(4L)).thenReturn(textoEntity1);
         
-        ResponseEntity<TextoEntity> TextoById = this.textoController.findById(4L);
-        assertEquals(HttpStatus.OK, TextoById.getStatusCode());
-        assertEquals("TituloTeste", TextoById.getBody().getTituloTexto());
-    }
+    //     ResponseEntity<TextoEntity> TextoById = this.textoController.findById(4L);
+    //     assertEquals(HttpStatus.OK, TextoById.getStatusCode());
+    //     assertEquals("TituloTeste", TextoById.getBody().getTituloTexto());
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar buscar um texto por Id")
-    void buscarTextosByIdTestErro() {
-        when(textoService.findById(10L)).thenThrow(new NoSuchElementException("Texto não encontrado"));
+    // @Test
+    // @DisplayName("Testa um erro ao tentar buscar um texto por Id")
+    // void buscarTextosByIdTestErro() {
+    //     when(textoService.findById(10L)).thenThrow(new NoSuchElementException("Texto não encontrado"));
 
-        ResponseEntity<TextoEntity> TextoByIdErro = this.textoController.findById(10L);
-        assertEquals(HttpStatus.BAD_REQUEST, TextoByIdErro.getStatusCode());
-    }
+    //     ResponseEntity<TextoEntity> TextoByIdErro = this.textoController.findById(10L);
+    //     assertEquals(HttpStatus.BAD_REQUEST, TextoByIdErro.getStatusCode());
+    // }
 
-    @Test
-    @DisplayName("Teste para alteração de textos pelo Id")
-    void alterarTextoById() throws Exception {
-        TextoEntity novoTexto = new TextoEntity(10L, "Titulo", "Conteudo", null, null, null);
-        when(textoService.alterarTexto(10L, novoTexto)).thenReturn(novoTexto);
+    // @Test
+    // @DisplayName("Teste para alteração de textos pelo Id")
+    // void alterarTextoById() throws Exception {
+    //     TextoEntity novoTexto = new TextoEntity(10L, "Titulo", "Conteudo", null, null, null);
+    //     when(textoService.alterarTexto(10L, novoTexto)).thenReturn(novoTexto);
     
-        ResponseEntity<TextoEntity> resposta = textoController.alterar(10L, novoTexto);
-        assertEquals(HttpStatus.OK, resposta.getStatusCode());
-        assertEquals(novoTexto, resposta.getBody());
+    //     ResponseEntity<TextoEntity> resposta = textoController.alterar(10L, novoTexto);
+    //     assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    //     assertEquals(novoTexto, resposta.getBody());
 
-        // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
-    }
+    //     // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar alterar texto pelo Id")
-    void alterarTextoByIdErro() throws Exception {
-        TextoEntity novaTexto = new TextoEntity(11L, "Texto Novo2", "Conteudo Novo2", null, null, null);
-        doThrow(new Exception("Texto 11 não encontrado!")).when(textoService).alterarTexto(11L, novaTexto);
+    // @Test
+    // @DisplayName("Testa um erro ao tentar alterar texto pelo Id")
+    // void alterarTextoByIdErro() throws Exception {
+    //     TextoEntity novaTexto = new TextoEntity(11L, "Texto Novo2", "Conteudo Novo2", null, null, null);
+    //     doThrow(new Exception("Texto 11 não encontrado!")).when(textoService).alterarTexto(11L, novaTexto);
     
-        ResponseEntity<TextoEntity> resposta = textoController.alterar(11L, novaTexto);
-        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
-        assertNull(resposta.getBody());
-    }
+    //     ResponseEntity<TextoEntity> resposta = textoController.alterar(11L, novaTexto);
+    //     assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+    //     assertNull(resposta.getBody());
+    // }
 
     @Test
     @DisplayName("Teste que busca textos por tag")

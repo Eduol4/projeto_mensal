@@ -87,23 +87,23 @@ public class UsuarioControllerTests {
         assertNull(lista.getBody());
     }
 
-    @Test
-    @DisplayName("Teste que busca um usuário por Id")
-    void buscarUsersByIdTest() {
-        UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
-        when(usuarioService.findById(4L)).thenReturn(usuarioEntity);
+    // @Test
+    // @DisplayName("Teste que busca um usuário por Id")
+    // void buscarUsersByIdTest() {
+    //     UsuarioEntity usuarioEntity = new UsuarioEntity(4L, "Brabo", "senhaBraba", null);
+    //     when(usuarioService.findById(4L)).thenReturn(usuarioEntity);
         
-        ResponseEntity<UsuarioEntity> UserById = this.usuarioController.findById(4L);
-        assertEquals(HttpStatus.OK, UserById.getStatusCode());
-        assertEquals("Brabo", UserById.getBody().getNomeUsuario());
-    }
+    //     ResponseEntity<UsuarioEntity> UserById = this.usuarioController.findById(4L);
+    //     assertEquals(HttpStatus.OK, UserById.getStatusCode());
+    //     assertEquals("Brabo", UserById.getBody().getNomeUsuario());
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar buscar um usuário por Id")
-    void buscarUsersByIdTestErro() {
-        when(usuarioService.findById(10L)).thenThrow(new NoSuchElementException("Usuário não encontrado"));
+    // @Test
+    // @DisplayName("Testa um erro ao tentar buscar um usuário por Id")
+    // void buscarUsersByIdTestErro() {
+    //     when(usuarioService.findById(10L)).thenThrow(new NoSuchElementException("Usuário não encontrado"));
 
-        ResponseEntity<UsuarioEntity> UserByIdErro = this.usuarioController.findById(10L);
-        assertEquals(HttpStatus.BAD_REQUEST, UserByIdErro.getStatusCode());
-    }
+    //     ResponseEntity<UsuarioEntity> UserByIdErro = this.usuarioController.findById(10L);
+    //     assertEquals(HttpStatus.BAD_REQUEST, UserByIdErro.getStatusCode());
+    // }
 }

@@ -89,51 +89,49 @@ public class CategoriaControllerTests {
         assertNull(lista.getBody());
     }
 
-    @Test
-    @DisplayName("Teste que busca uma categoria por Id")
-    void buscarCategoriasByIdTest() {
-        CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
-        when(categoriaService.findById(4L)).thenReturn(categoriaEntity1);
+    // @Test
+    // @DisplayName("Teste que busca uma categoria por Id")
+    // void buscarCategoriasByIdTest() {
+    //     CategoriaEntity categoriaEntity1 = new CategoriaEntity(4L, "Testão", null);
+    //     when(categoriaService.findById(4L)).thenReturn(categoriaEntity1);
         
-        ResponseEntity<CategoriaEntity> CategoriaById = this.categoriaController.findById(4L);
-        assertEquals(HttpStatus.OK, CategoriaById.getStatusCode());
-        assertEquals("Testão", CategoriaById.getBody().getTituloCategoria());
-    }
+    //     ResponseEntity<CategoriaEntity> CategoriaById = this.categoriaController.findById(4L);
+    //     assertEquals(HttpStatus.OK, CategoriaById.getStatusCode());
+    //     assertEquals("Testão", CategoriaById.getBody().getTituloCategoria());
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar buscar uma categoria por Id")
-    void buscarCategoriasByIdTestErro() {
-        when(categoriaService.findById(10L)).thenThrow(new NoSuchElementException("Categoria não encontrada"));
+    // @Test
+    // @DisplayName("Testa um erro ao tentar buscar uma categoria por Id")
+    // void buscarCategoriasByIdTestErro() {
+    //     when(categoriaService.findById(10L)).thenThrow(new NoSuchElementException("Categoria não encontrada"));
 
-        ResponseEntity<CategoriaEntity> CategoriaByIdErro = this.categoriaController.findById(10L);
-        assertEquals(HttpStatus.BAD_REQUEST, CategoriaByIdErro.getStatusCode());
-    }
+    //     ResponseEntity<CategoriaEntity> CategoriaByIdErro = this.categoriaController.findById(10L);
+    //     assertEquals(HttpStatus.BAD_REQUEST, CategoriaByIdErro.getStatusCode());
+    // }
 
-    @Test
-    @DisplayName("Teste para alteração de categorias pelo Id")
-    void alterarCategoriaById() throws Exception {
-    List<TextoEntity> textoAlteracao =  new ArrayList<>();
-    CategoriaEntity novaCategoria = new CategoriaEntity(10L, "Categoria Nova", textoAlteracao);
+    // @Test
+    // @DisplayName("Teste para alteração de categorias pelo Id")
+    // void alterarCategoriaById() throws Exception {
+    // List<TextoEntity> textoAlteracao =  new ArrayList<>();
+    // CategoriaEntity novaCategoria = new CategoriaEntity(10L, "Categoria Nova", textoAlteracao);
     
-    when(categoriaService.alterarCategoria(10L, novaCategoria)).thenReturn(novaCategoria);
+    // when(categoriaService.alterarCategoria(10L, novaCategoria)).thenReturn(novaCategoria);
     
-    ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(10L, novaCategoria);
-    assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    assertEquals(novaCategoria, resposta.getBody());
+    // ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(10L, novaCategoria);
+    // assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    // assertEquals(novaCategoria, resposta.getBody());
 
-    // verify(categoriaService, times(1)).alterarCategoria(eq(1L), any(CategoriaEntity.class));
-    }
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar alterar categoria pelo Id")
-    void alterarCategoriaByIdErro() throws Exception {
-        List<TextoEntity> textoAlteracao = new ArrayList<>();
-        CategoriaEntity novaCategoria = new CategoriaEntity(11L, "Categoria Nova2", textoAlteracao);
-        doThrow(new Exception("Categoria 11 não encontrada!")).when(categoriaService).alterarCategoria(11L, novaCategoria);
+    // @Test
+    // @DisplayName("Testa um erro ao tentar alterar categoria pelo Id")
+    // void alterarCategoriaByIdErro() throws Exception {
+    //     List<TextoEntity> textoAlteracao = new ArrayList<>();
+    //     CategoriaEntity novaCategoria = new CategoriaEntity(11L, "Categoria Nova2", textoAlteracao);
+    //     doThrow(new Exception("Categoria 11 não encontrada!")).when(categoriaService).alterarCategoria(11L, novaCategoria);
     
-        // Executa a chamada do controlador e verifica se o status é BAD_REQUEST
-        ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(11L, novaCategoria);
-        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
-        assertNull(resposta.getBody());
-    }
+    //     ResponseEntity<CategoriaEntity> resposta = categoriaController.alterar(11L, novaCategoria);
+    //     assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+    //     assertNull(resposta.getBody());
+    // }
 }

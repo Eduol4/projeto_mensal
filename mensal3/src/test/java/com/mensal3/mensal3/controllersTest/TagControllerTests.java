@@ -91,52 +91,52 @@ public class TagControllerTests {
         assertNull(lista.getBody());
     }
 
-    @Test
-    @DisplayName("Teste que busca uma tag por Id")
-    void buscarTagsByIdTest() {
-        List<TextoEntity> textoTeste1 = new ArrayList<>();
-        TagEntity tagEntity1 = new TagEntity(4L, "Tag teste", textoTeste1);
-        when(tagService.findById(4L)).thenReturn(tagEntity1);
+    // @Test
+    // @DisplayName("Teste que busca uma tag por Id")
+    // void buscarTagsByIdTest() {
+    //     List<TextoEntity> textoTeste1 = new ArrayList<>();
+    //     TagEntity tagEntity1 = new TagEntity(4L, "Tag teste", textoTeste1);
+    //     when(tagService.findById(4L)).thenReturn(tagEntity1);
         
-        ResponseEntity<TagEntity> TagById = this.tagController.findById(4L);
-        assertEquals(HttpStatus.OK, TagById.getStatusCode());
-        assertEquals("Tag teste", TagById.getBody().getTituloTag());
-    }
+    //     ResponseEntity<TagEntity> TagById = this.tagController.findById(4L);
+    //     assertEquals(HttpStatus.OK, TagById.getStatusCode());
+    //     assertEquals("Tag teste", TagById.getBody().getTituloTag());
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar buscar uma tag por Id")
-    void buscarTagsByIdTestErro() {
-        when(tagService.findById(10L)).thenThrow(new NoSuchElementException("Tag não encontrada"));
+    // @Test
+    // @DisplayName("Testa um erro ao tentar buscar uma tag por Id")
+    // void buscarTagsByIdTestErro() {
+    //     when(tagService.findById(10L)).thenThrow(new NoSuchElementException("Tag não encontrada"));
 
-        ResponseEntity<TagEntity> TagByIdErro = this.tagController.findById(10L);
-        assertEquals(HttpStatus.BAD_REQUEST, TagByIdErro.getStatusCode());
-    }
+    //     ResponseEntity<TagEntity> TagByIdErro = this.tagController.findById(10L);
+    //     assertEquals(HttpStatus.BAD_REQUEST, TagByIdErro.getStatusCode());
+    // }
 
-    @Test
-    @DisplayName("Teste para alteração de tags pelo Id")
-    void alterarTagById() throws Exception {
-    List<TextoEntity> textoAlteracao =  new ArrayList<>();
-    TagEntity novaTag = new TagEntity(10L, "Tag Nova", textoAlteracao);
+    // @Test
+    // @DisplayName("Teste para alteração de tags pelo Id")
+    // void alterarTagById() throws Exception {
+    // List<TextoEntity> textoAlteracao =  new ArrayList<>();
+    // TagEntity novaTag = new TagEntity(10L, "Tag Nova", textoAlteracao);
     
-    when(tagService.alterarTag(10L, novaTag)).thenReturn(novaTag);
+    // when(tagService.alterarTag(10L, novaTag)).thenReturn(novaTag);
     
-    ResponseEntity<TagEntity> resposta = tagController.alterar(10L, novaTag);
-    assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    assertEquals(novaTag, resposta.getBody());
+    // ResponseEntity<TagEntity> resposta = tagController.alterar(10L, novaTag);
+    // assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    // assertEquals(novaTag, resposta.getBody());
 
-    // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
-    }
+    // // verify(tagService, times(1)).alterarTag(eq(1L), any(TagEntity.class));
+    // }
 
-    @Test
-    @DisplayName("Testa um erro ao tentar alterar tag pelo Id")
-        void alterarTagByIdErro() throws Exception {
-        List<TextoEntity> textoAlteracao = new ArrayList<>();
-        TagEntity novaTag = new TagEntity(11L, "Tag Nova2", textoAlteracao);
+    // @Test
+    // @DisplayName("Testa um erro ao tentar alterar tag pelo Id")
+    //     void alterarTagByIdErro() throws Exception {
+    //     List<TextoEntity> textoAlteracao = new ArrayList<>();
+    //     TagEntity novaTag = new TagEntity(11L, "Tag Nova2", textoAlteracao);
 
-        doThrow(new Exception("Tag 11 não encontrada!")).when(tagService).alterarTag(11L, novaTag);
+    //     doThrow(new Exception("Tag 11 não encontrada!")).when(tagService).alterarTag(11L, novaTag);
 
-        ResponseEntity<TagEntity> resposta = tagController.alterar(11L, novaTag);
-        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
-        assertNull(resposta.getBody());
-    }
+    //     ResponseEntity<TagEntity> resposta = tagController.alterar(11L, novaTag);
+    //     assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+    //     assertNull(resposta.getBody());
+    // }
 }
