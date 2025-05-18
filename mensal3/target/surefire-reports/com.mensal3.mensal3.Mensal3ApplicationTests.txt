@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mensal3.mensal3.Mensal3ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.020 s -- in com.mensal3.mensal3.Mensal3ApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.mensal3.mensal3.Mensal3ApplicationTests

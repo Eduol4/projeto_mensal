@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComentarioService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.services</a> &gt; <span class="el_source">ComentarioService.java</span></div><h1>ComentarioService.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.services;
+
+import com.mensal3.mensal3.dto.ComentarioDTO;
+import com.mensal3.mensal3.entities.ComentarioEntity;
+import com.mensal3.mensal3.entities.UsuarioEntity;
+import com.mensal3.mensal3.entities.TextoEntity;
+import com.mensal3.mensal3.repositories.ComentarioRepository;
+import com.mensal3.mensal3.repositories.UsuarioRepository;
+import com.mensal3.mensal3.repositories.TextoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+<span class="fc" id="L17">public class ComentarioService {</span>
+
+    @Autowired
+    private ComentarioRepository comentarioRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private TextoRepository textoRepository;
+
+    public ComentarioEntity registrarComentario(ComentarioDTO comentarioDTO) throws Exception {
+<span class="nc" id="L29">        UsuarioEntity autor = usuarioRepository.findById(comentarioDTO.getAutorId())</span>
+<span class="nc" id="L30">                .orElseThrow(() -&gt; new Exception(&quot;Autor não encontrado&quot;));</span>
+
+<span class="nc" id="L32">        TextoEntity texto = textoRepository.findById(comentarioDTO.getTextoId())</span>
+<span class="nc" id="L33">                .orElseThrow(() -&gt; new Exception(&quot;Texto não encontrado&quot;));</span>
+
+<span class="nc" id="L35">        ComentarioEntity comentarioEntity = new ComentarioEntity();</span>
+<span class="nc" id="L36">        comentarioEntity.setConteudo(comentarioDTO.getConteudo());</span>
+<span class="nc" id="L37">        comentarioEntity.setAutor(autor);</span>
+<span class="nc" id="L38">        comentarioEntity.setTexto(texto);</span>
+<span class="nc" id="L39">        comentarioEntity.setDataComentario(LocalDateTime.now());</span>
+
+<span class="nc" id="L41">        return comentarioRepository.save(comentarioEntity);</span>
+    }
+
+    public List&lt;ComentarioEntity&gt; listarComentarios(Long idTexto) {
+<span class="nc" id="L45">        return comentarioRepository.findByTexto_IdTexto(idTexto);</span>
+    }
+
+    public void deletarComentario(Long idComentario) throws Exception {
+<span class="nc" id="L49">        ComentarioEntity comentario = comentarioRepository.findById(idComentario)</span>
+<span class="nc" id="L50">                .orElseThrow(() -&gt; new Exception(&quot;Comentário não encontrado&quot;));</span>
+<span class="nc" id="L51">        comentarioRepository.delete(comentario);</span>
+<span class="nc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

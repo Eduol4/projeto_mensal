@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.mensal3.mensal3.controllersTest.TagControllerTests
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.483 s -- in com.mensal3.mensal3.controllersTest.TagControllerTests

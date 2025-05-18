@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComentarioEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.entities</a> &gt; <span class="el_source">ComentarioEntity.java</span></div><h1>ComentarioEntity.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.entities;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+<span class="fc" id="L7">public class ComentarioEntity {</span>
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String conteudo;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;autor_id&quot;, nullable = false)
+    private UsuarioEntity autor;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;texto_id&quot;, nullable = false)
+    private TextoEntity texto;
+
+    @Column(nullable = false)
+    private LocalDateTime dataComentario;
+
+    public Long getId() {
+<span class="fc" id="L28">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="fc" id="L32">        this.id = id;</span>
+<span class="fc" id="L33">    }</span>
+
+    public String getConteudo() {
+<span class="fc" id="L36">        return conteudo;</span>
+    }
+
+    public void setConteudo(String conteudo) {
+<span class="fc" id="L40">        this.conteudo = conteudo;</span>
+<span class="fc" id="L41">    }</span>
+
+    public UsuarioEntity getAutor() {
+<span class="fc" id="L44">        return autor;</span>
+    }
+
+    public void setAutor(UsuarioEntity autor) {
+<span class="fc" id="L48">        this.autor = autor;</span>
+<span class="fc" id="L49">    }</span>
+
+    public TextoEntity getTexto() {
+<span class="fc" id="L52">        return texto;</span>
+    }
+
+    public void setTexto(TextoEntity texto) {
+<span class="fc" id="L56">        this.texto = texto;</span>
+<span class="fc" id="L57">    }</span>
+
+    public LocalDateTime getDataComentario() {
+<span class="fc" id="L60">        return dataComentario;</span>
+    }
+
+    public void setDataComentario(LocalDateTime dataComentario) {
+<span class="fc" id="L64">        this.dataComentario = dataComentario;</span>
+<span class="fc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

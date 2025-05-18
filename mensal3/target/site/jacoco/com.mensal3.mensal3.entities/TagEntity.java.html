@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.entities</a> &gt; <span class="el_source">TagEntity.java</span></div><h1>TagEntity.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.entities;
+
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity(name = &quot;tag&quot;)
+public class TagEntity {
+
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idTag;
+
+    @Column(name = &quot;tituloTag&quot;)
+	@NotBlank
+    private String tituloTag;
+
+    @ManyToMany(mappedBy = &quot;tag&quot;)
+    private List&lt;TextoEntity&gt; texto;
+
+<span class="fc" id="L27">	public TagEntity() {}</span>
+
+<span class="fc" id="L29">	public TagEntity(Long idTag, String tituloTag, List&lt;TextoEntity&gt; texto) {</span>
+<span class="fc" id="L30">		this.idTag = idTag;</span>
+<span class="fc" id="L31">		this.tituloTag = tituloTag;</span>
+<span class="fc" id="L32">		this.texto = texto;</span>
+<span class="fc" id="L33">	}</span>
+
+    public String getTituloTag() {
+<span class="fc" id="L36">		return tituloTag;</span>
+	}
+	public void setTituloTag(String tituloTag) {
+<span class="fc" id="L39">		this.tituloTag = tituloTag;</span>
+<span class="fc" id="L40">	}</span>
+	
+	public Long getIdTag() {
+<span class="fc" id="L43">		return idTag;</span>
+	}
+	public void setIdTag(Long idTag) {
+<span class="fc" id="L46">		this.idTag = idTag;</span>
+<span class="fc" id="L47">	}</span>
+
+    public List&lt;TextoEntity&gt; getTexto() {
+<span class="fc" id="L50">		return texto;</span>
+	}
+	public void setTexto(List&lt;TextoEntity&gt; texto) {
+<span class="fc" id="L53">		this.texto = texto;</span>
+<span class="fc" id="L54">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

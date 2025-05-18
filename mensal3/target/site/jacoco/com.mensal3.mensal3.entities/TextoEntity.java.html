@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextoEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.entities</a> &gt; <span class="el_source">TextoEntity.java</span></div><h1>TextoEntity.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.entities;
+
+import java.util.List;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity(name = &quot;texto&quot;)
+public class TextoEntity {
+
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idTexto;
+
+    @Column(name = &quot;tituloTexto&quot;)
+	@NotBlank
+    private String tituloTexto;
+
+    @Column(name = &quot;conteudoTexto&quot;)
+	@NotBlank
+    private String conteudoTexto;
+
+    @ManyToOne
+	@JoinColumn(name = &quot;autor_id&quot;)
+	private UsuarioEntity autor;
+	
+    @ManyToMany
+    @JoinTable(
+        name = &quot;texto_tag&quot;,
+        joinColumns = @JoinColumn(name = &quot;texto_id&quot;),
+        inverseJoinColumns = @JoinColumn(name = &quot;tag_id&quot;)
+    )
+    private List&lt;TagEntity&gt; tag;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;categoria_id&quot;)
+    private CategoriaEntity categoria;
+
+<span class="fc" id="L39">	public TextoEntity() {}</span>
+
+<span class="fc" id="L41">	public TextoEntity(Long idTexto, String tituloTexto, String conteudoTexto, UsuarioEntity autor, List&lt;TagEntity&gt; tag, CategoriaEntity categoria) {</span>
+<span class="fc" id="L42">        this.idTexto = idTexto;</span>
+<span class="fc" id="L43">        this.tituloTexto = tituloTexto;</span>
+<span class="fc" id="L44">        this.conteudoTexto = conteudoTexto;</span>
+<span class="fc" id="L45">        this.autor = autor;</span>
+<span class="fc" id="L46">		this.tag = tag;</span>
+<span class="fc" id="L47">		this.categoria = categoria;</span>
+<span class="fc" id="L48">    }</span>
+
+    public String getTituloTexto() {
+<span class="fc" id="L51">		return tituloTexto;</span>
+	}
+	public void setTituloTexto(String tituloTexto) {
+<span class="fc" id="L54">		this.tituloTexto = tituloTexto;</span>
+<span class="fc" id="L55">	}</span>
+
+	public String getConteudoTexto() {
+<span class="fc" id="L58">		return conteudoTexto;</span>
+	}
+	public void setConteudoTexto(String conteudoTexto) {
+<span class="fc" id="L61">		this.conteudoTexto = conteudoTexto;</span>
+<span class="fc" id="L62">	}</span>
+
+	public Long getIdTexto() {
+<span class="fc" id="L65">		return idTexto;</span>
+	}
+	public void setIdTexto(Long idTexto) {
+<span class="fc" id="L68">		this.idTexto = idTexto;</span>
+<span class="fc" id="L69">	}</span>
+
+    public UsuarioEntity getAutor() {
+<span class="fc" id="L72">		return autor;</span>
+	}
+	public void setAutor(UsuarioEntity autor) {
+<span class="fc" id="L75">		this.autor = autor;</span>
+<span class="fc" id="L76">	}</span>
+
+	public List&lt;TagEntity&gt; getTag() {
+<span class="fc" id="L79">		return tag;</span>
+	}
+	public void setTag(List&lt;TagEntity&gt; tag) {
+<span class="fc" id="L82">		this.tag = tag;</span>
+<span class="fc" id="L83">	}</span>
+
+	public CategoriaEntity getCategoria() {
+<span class="fc" id="L86">		return categoria;</span>
+	}
+	public void setCategoria(CategoriaEntity categoria) {
+<span class="fc" id="L89">		this.categoria = categoria;</span>
+<span class="fc" id="L90">	}</span>
+
+	@OneToMany(mappedBy = &quot;texto&quot;, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List&lt;ComentarioEntity&gt; comentarios;
+
+	public List&lt;ComentarioEntity&gt; getComentarios() {
+<span class="fc" id="L96">		return comentarios;</span>
+	}
+
+	public void setComentarios(List&lt;ComentarioEntity&gt; comentarios) {
+<span class="fc" id="L100">		this.comentarios = comentarios;</span>
+<span class="fc" id="L101">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

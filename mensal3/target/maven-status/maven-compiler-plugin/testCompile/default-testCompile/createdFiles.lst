@@ -1,6 +1,11 @@
-com\mensal3\mensal3\controllersTest\UsuarioControllerTests.class
+com\mensal3\mensal3\entitiesTest\EntityTests.class
 com\mensal3\mensal3\servicesTest\UsuarioServiceTest.class
 com\mensal3\mensal3\controllersTest\TagControllerTests.class
-com\mensal3\mensal3\controllersTest\TextoControllerTests.class
 com\mensal3\mensal3\Mensal3ApplicationTests.class
+com\mensal3\mensal3\dtoTest\dtoTests.class
+com\mensal3\mensal3\servicesTest\TagServiceTest.class
+com\mensal3\mensal3\controllersTest\UsuarioControllerTests.class
+com\mensal3\mensal3\controllersTest\TextoControllerTests.class
+com\mensal3\mensal3\servicesTest\TextoServiceTest.class
+com\mensal3\mensal3\servicesTest\CategoriaServiceTest.class
 com\mensal3\mensal3\controllersTest\CategoriaControllerTests.class

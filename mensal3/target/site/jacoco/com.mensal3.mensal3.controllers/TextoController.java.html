@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.controllers</a> &gt; <span class="el_source">TextoController.java</span></div><h1>TextoController.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mensal3.mensal3.entities.TextoEntity;
+import com.mensal3.mensal3.services.TextoService;
+
+@RestController
+@RequestMapping(&quot;/textos&quot;)
+<span class="fc" id="L23">public class TextoController {</span>
+
+    @Autowired
+	private TextoService textoService;
+	
+	@PostMapping(&quot;/registrarTexto&quot;)
+	public ResponseEntity&lt;TextoEntity&gt; registrar(@Validated @RequestBody TextoEntity textoEntity) {
+		try {
+<span class="fc" id="L31">			return ResponseEntity.ok(textoService.registrarTexto(textoEntity));</span>
+<span class="fc" id="L32">		} catch (Exception e) {</span>
+<span class="fc" id="L33">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+		}
+	}
+	
+	@GetMapping(&quot;/listarTextos&quot;)
+	public ResponseEntity&lt;List&lt;TextoEntity&gt;&gt; listAll() {
+		try {
+<span class="fc" id="L40">			return ResponseEntity.ok(textoService.listAllTexto());</span>
+<span class="fc" id="L41">		} catch (Exception e) {</span>
+<span class="fc" id="L42">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+		}
+	}
+
+	@GetMapping(&quot;/buscarTexto/{idTexto}&quot;)
+	public ResponseEntity&lt;TextoEntity&gt; findById(@PathVariable Long idTexto) {
+		try {
+<span class="nc" id="L49">			return ResponseEntity.ok(textoService.findById(idTexto));</span>
+<span class="nc" id="L50">		} catch (Exception e) {</span>
+<span class="nc" id="L51">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+		}
+	}
+	
+    @GetMapping(&quot;/buscarTag/{tagName}&quot;)
+    public ResponseEntity&lt;List&lt;TextoEntity&gt;&gt; buscarTag(@PathVariable String tagName) {
+        try {
+<span class="fc" id="L58">            List&lt;TextoEntity&gt; textoEntity = textoService.buscarTextoTag(tagName);</span>
+            
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (textoEntity.isEmpty()) {</span>
+<span class="fc" id="L61">                return ResponseEntity.noContent().build();</span>
+            }
+            
+<span class="fc" id="L64">            return ResponseEntity.ok(textoEntity);</span>
+<span class="fc" id="L65">        } catch (Exception e) {</span>
+<span class="fc" id="L66">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+        }
+    }
+
+    @GetMapping(&quot;/buscarCategoria/{categoriaName}&quot;)
+    public ResponseEntity&lt;List&lt;TextoEntity&gt;&gt; buscarCategoria(@PathVariable String categoriaName) {
+        try {
+<span class="fc" id="L73">            List&lt;TextoEntity&gt; textoEntity = textoService.buscarTextoCategoria(categoriaName);</span>
+            
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            if (textoEntity.isEmpty()) {</span>
+<span class="fc" id="L76">                return ResponseEntity.noContent().build();</span>
+            }
+            
+<span class="fc" id="L79">            return ResponseEntity.ok(textoEntity);</span>
+<span class="fc" id="L80">        } catch (Exception e) {</span>
+<span class="fc" id="L81">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+        }
+    }
+	
+	@DeleteMapping(&quot;/deletarTexto/{idTexto}&quot;)
+    public ResponseEntity&lt;Void&gt; delete(@PathVariable Long idTexto) {
+		try {
+<span class="nc" id="L88">	        textoService.deleteTexto(idTexto);</span>
+<span class="nc" id="L89">	        return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L90">		} catch (Exception e) {</span>
+<span class="nc" id="L91">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+		}
+	}
+
+	@PutMapping(&quot;/alterarTexto/{idTexto}&quot;)
+	public ResponseEntity&lt;TextoEntity&gt; alterar(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+		try {
+<span class="nc" id="L98">			TextoEntity textoAlterado = textoService.alterarTexto(idTexto, novaTextoEntity);</span>
+<span class="nc" id="L99">			return ResponseEntity.ok(textoAlterado);</span>
+<span class="nc" id="L100">		} catch (Exception e) {</span>
+<span class="nc" id="L101">			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);</span>
+		}
+	}
+	
+	// @PutMapping(&quot;/alterarTitulo/{idTexto}&quot;)
+	// public ResponseEntity&lt;TextoEntity&gt; alterarTitulo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+	// 	try {
+	// 		TextoEntity textoAlterada = textoService.alterarTitulo(idTexto, novaTextoEntity);
+	// 		return ResponseEntity.ok(textoAlterada);
+	// 	} catch (Exception e) {
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	// 	}
+	// }
+	
+	// @PutMapping(&quot;/alterarConteudo/{idTexto}&quot;)
+	// public ResponseEntity&lt;TextoEntity&gt; alterarConteudo(@PathVariable Long idTexto, @RequestBody TextoEntity novaTextoEntity) {
+	// 	try {
+	// 		TextoEntity textoAlterada = textoService.alterarConteudo(idTexto, novaTextoEntity);
+	// 		return ResponseEntity.ok(textoAlterada);
+	// 	} catch (Exception e) {
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	// 	}
+	// }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mensal3</a> &gt; <a href="index.source.html" class="el_package">com.mensal3.mensal3.services</a> &gt; <span class="el_source">TextoService.java</span></div><h1>TextoService.java</h1><pre class="source lang-java linenums">package com.mensal3.mensal3.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mensal3.mensal3.entities.TextoEntity;
+import com.mensal3.mensal3.repositories.TextoRepository;
+
+@Service
+<span class="fc" id="L13">public class TextoService {</span>
+
+    @Autowired
+    private TextoRepository textoRepository;
+
+    public TextoEntity registrarTexto(TextoEntity textoEntity) {
+<span class="fc" id="L19">		return textoRepository.save(textoEntity);</span>
+	}
+	
+	public List&lt;TextoEntity&gt; listAllTexto() {
+<span class="fc" id="L23">		return textoRepository.findAll();</span>
+	}
+	
+	public List&lt;TextoEntity&gt; buscarTextoTag(String tagName) {
+<span class="fc" id="L27">		return textoRepository.findByTag_TituloTag(tagName);</span>
+	}
+	
+	public List&lt;TextoEntity&gt; buscarTextoCategoria(String categoriaName) {
+<span class="fc" id="L31">		return textoRepository.findByCategoria_TituloCategoria(categoriaName);</span>
+	}
+
+	public TextoEntity findById(Long idTexto) {
+<span class="fc" id="L35">		return textoRepository.findById(idTexto).get();</span>
+	}
+	
+	public void deleteTexto(Long idTexto) throws Exception{
+<span class="fc" id="L39">				TextoEntity textoEntity = textoRepository.findById(idTexto)</span>
+<span class="fc" id="L40">			.orElseThrow(() -&gt; new Exception(&quot;Texto não encontrado!&quot;));</span>
+		
+<span class="fc" id="L42">		textoRepository.delete(textoEntity);</span>
+<span class="fc" id="L43">	}</span>
+
+	public TextoEntity alterarTexto(Long idTexto, TextoEntity novoTextoEntity) throws Exception{
+<span class="fc" id="L46">		Optional&lt;TextoEntity&gt; textoExistenteOpt = textoRepository.findById(idTexto);</span>
+		
+<span class="fc bfc" id="L48" title="All 2 branches covered.">		if (textoExistenteOpt.isPresent()) {</span>
+<span class="fc" id="L49">			TextoEntity textoExistente = textoExistenteOpt.get();</span>
+<span class="fc" id="L50">			textoExistente.setTituloTexto(novoTextoEntity.getTituloTexto());</span>
+<span class="fc" id="L51">			textoExistente.setConteudoTexto(novoTextoEntity.getConteudoTexto());</span>
+<span class="fc" id="L52">			return textoRepository.save(textoExistente);</span>
+		}
+		else {
+<span class="fc" id="L55">			throw new Exception(&quot;Texto não encontrado!&quot;);</span>
+		}
+	}
+	
+	// public TextoEntity alterarTitulo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
+	// 	Optional&lt;TextoEntity&gt; textoExistenteOpt = textoRepository.findById(idTexto);
+		
+	// 	if (textoExistenteOpt.isPresent()) {
+	// 		TextoEntity textoExistente = textoExistenteOpt.get();
+			
+	// 		textoExistente.setTituloTexto(novaTextoEntity.getTituloTexto());
+			
+	// 		return textoRepository.save(textoExistente);
+	// 	}
+	// 	else {
+	// 		throw new Exception(&quot;Texto não encontrado!&quot;);
+	// 	}
+	// }
+	
+	// public TextoEntity alterarConteudo(Long idTexto, TextoEntity novaTextoEntity) throws Exception{
+	// 	Optional&lt;TextoEntity&gt; textoExistenteOpt = textoRepository.findById(idTexto);
+		
+	// 	if (textoExistenteOpt.isPresent()) {
+	// 		TextoEntity textoExistente = textoExistenteOpt.get();
+			
+	// 		textoExistente.setConteudoTexto(novaTextoEntity.getConteudoTexto());
+			
+	// 		return textoRepository.save(textoExistente);
+	// 	}
+	// 	else {
+	// 		throw new Exception(&quot;Texto não encontrado!&quot;);
+	// 	}
+	// }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
